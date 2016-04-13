@@ -1,0 +1,72 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Tahoma, Geneva, sans-serif;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+/** Top **/
+#top {
+	font-size: 24px;
+}
+#history {
+	position: absolute;
+	left: 20px;
+}
+#current-date {
+	position:absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+#menu {
+	position: absolute;
+	right: 20px;
+}
+#menu span:before {
+	content: "\f0c9";
+	font-family: 'FontAwesome';
+	margin-right: 5px;
+}
+#menu span {
+	cursor: pointer;
+}
+#menu ul {
+	position: absolute;
+	right: -120px;
+	-webkit-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	list-style: none;
+	margin: 0;
+}
+#menu ul.active {
+	right: -16px;
+}
+#menu ul li.about {
+
+}
+#menu ul li:before {
+	font-family: 'FontAwesome';
+	position: relative;
+	right: 5px;
+	top: -3px;
+	font-size: 20px;
+}
+#menu ul li.about:before {
+	content: "\f05a";
+}
+#menu ul li.help:before {
+	content: "\f059";
+}
+#menu ul li.restart:before {
+	content: "\f01e";
+}
+
+/** Bottom **/
