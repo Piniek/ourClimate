@@ -8,24 +8,26 @@
 		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="css/map.css">
+        <!-- Add IntroJs styles -->
+        <link href="js/introjs.css" rel="stylesheet">
 		
 		<script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
 		<script src="js/map.js" type="text/javascript"></script>
 		<script src="js/main.js" type="text/javascript"></script>
 	<body>
 		<div id="top">
-			<div id="history">History</div>
-			<div id="current-date">Date</div>
+			<div id="history" data-step="1" data-intro="This will provide you with the history of your decisions">History</div>
+			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'>Date</div>
 			<div id="menu">
 				<span>Menu</span>
 				<ul>
 					<li class="about">About</li>
-					<li class="help">Help</li>
+                    <li class="help"><a href="javascript:void(0);" onclick="javascript:introJs().start();">Help</a></li>
 					<li class="restart">Restart</li>
 				</ul>
 			</div>
 		</div>
-		<div id="svgContainer">
+		<div id="svgContainer" data-step="3" data-intro="This is the globe! Alerts will pop up on the map. Make sure you complete these to save the planet.">
 		</div>
 		
 		<!--<button id="bounce">Bounce Random Alert</button>
@@ -60,6 +62,7 @@
 				</li>
 			</ul>
 		</div>
+        <script type="text/javascript" src="js/intro.js"></script>
 	</body>
 </html>
 
