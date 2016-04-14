@@ -1,5 +1,10 @@
 $(function() {
 	$("#menu span").click(function() {
-		$("#menu ul").toggleClass("active");
+		$("#menu").toggleClass("active");
+	});
+	
+	$("#history span").click(function() {
+		$("#history").toggleClass("active");
+		$("#overlay").toggleClass("active");
 	});
 });

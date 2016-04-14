@@ -12,15 +12,25 @@ html, body {
 	box-sizing: inherit;
 }
 
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 3;
+	display: none;
+}
+#overlay.active {
+	display: block;
+}
+
 /** Top **/
 #top {
 	font-size: 24px;
     padding-top: 5px;
     padding-bottom: 40px;
-}
-#history {
-	position: absolute;
-	left: 20px;
 }
 #current-date {
 	position:absolute;
@@ -32,13 +42,16 @@ html, body {
 	position: absolute;
 	right: 20px;
 }
+#menu span {
+	cursor: pointer;
+}
 #menu span:before {
 	content: "\f0c9";
 	font-family: 'FontAwesome';
 	margin-right: 5px;
 }
-#menu span {
-	cursor: pointer;
+#menu.active span:before {
+	content: "\f00d";
 }
 #menu ul {
 	position: absolute;
@@ -48,7 +61,7 @@ html, body {
 	list-style: none;
 	margin: 0;
 }
-#menu ul.active {
+#menu.active ul {
 	right: -16px;
 }
 #menu ul li.about {
@@ -71,4 +84,87 @@ html, body {
 	content: "\f01e";
 }
 
+
+#history {
+	position: absolute;
+	padding-left: 20px;
+	background: #fff;
+	-webkit-transition: all 0.315s ease-out;
+	transition: all 0.315s ease-out;
+}
+#history.active {
+	z-index: 5;
+	padding-right: 272px;
+}
+#history span {
+	cursor: pointer;
+	margin-left: 18px;
+}
+#history span:before {
+	content: "\f1ea";
+	font-family: 'FontAwesome';
+	position: absolute;
+	left: 6px;
+	top: 5px;
+	-webkit-transition: content 0.3s ease-out;
+	transition: content 0.3s ease-out;
+}
+#history.active span:before {
+	content: "\f00d";
+	left: 14px;
+}
+#history ul {
+	position: absolute;
+	left: -410px;
+	-webkit-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	list-style: none;
+	margin: 0;
+	width: 400px;
+	padding-top: 8px;
+}
+#history.active ul {
+	left: -16px;
+	background: #fff;
+}
+#history ul li h4 {
+	font-size: 18px;
+	margin: 2px 0;
+}
+#history ul li h4:before {
+	margin-right: 4px;
+	content: "\f058";
+	font-family: 'FontAwesome';
+	color: green;
+}
+#history ul li:last-child h4:before {
+	content: "\f057";
+	color: red;
+}
+#history ul li div {
+	margin-bottom: 12px;
+	font-size: 18px;
+}
+
 /** Bottom **/
+
+#bottom ul {
+	list-style: none;
+}
+#bottom ul li {
+	float: left;
+	width: 33%;
+}
+#bottom ul li div {
+	display: inline-block;
+	position: relative;
+}
+#bottom ul li div.change:before {
+	font-family: 'FontAwesome';
+	content: '\f176';
+	position: absolute;
+	top: -50px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 50px;
+}
