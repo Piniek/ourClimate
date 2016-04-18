@@ -3,4 +3,4 @@
     $db_connection['host'] = "localhost";
     $db_connection['username'] = "root"; // Change this to your user
     $db_connection['password'] = ""; // randomly generated (previously cs546)
-    $db_connection['database'] = "ourClimate"; // randomly generated
+    $db_connection['database'] = "ourclimate"; // randomly generated

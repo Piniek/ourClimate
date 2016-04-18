@@ -30,15 +30,15 @@
          * @param Species $species
          * @param string  $name
          */
-        public function __construct( )
+        public function __construct( $_id, $_title, $_text, $_provided_answer, $_acceptID, $_declineID, $_type )
         {
-            $this->id         = 0;
-            $this->title      = "";
-            $this->text    = "";
-            $this->provided_answer = null;
-            $this->acceptID = 0;
-            $this->declineID = 0;
-            $this->type = "";
+            $this->id         = $_id;
+            $this->title      = $_title;
+            $this->text    = $_text;
+            $this->provided_answer = $_provided_answer;
+            $this->acceptID = $_acceptID;
+            $this->declineID = $_declineID;
+            $this->type = $_type;
         }
         
         /**
