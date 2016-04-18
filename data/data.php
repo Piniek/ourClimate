@@ -1,6 +1,7 @@
 <?php
     
     require_once 'data/connection.php';
+    require_once 'data/AccDecQuestions.php';
     
     class OurClimateData
     {
