@@ -25,6 +25,9 @@ $(function() {
 	var animTime = 200;
 	
 	$("#svgContainer").on("click", "g", function() {
+		if($(this).hasClass("svg-alert"))
+			return;
+		
 		if($(this).hasClass("active"))
 		{
 			$("#svgAnim-normal")[0].beginElement();
