@@ -25,6 +25,8 @@ $(function() {
 	var animTime = 200;
 	
 	$("#svgContainer").on("click", "g", function() {
+		return;
+		
 		if($(this).hasClass("svg-alert"))
 			return;
 		
@@ -116,7 +118,8 @@ function alertsBounceLoop()
 	if(!$("#svgContainer").hasClass("active"))
 	{
 		$(".svg-alert").each(function() {
-			bounce($(this));
+			if(!$(this).is(":hover"))
+				bounce($(this));
 		});
 	}
 	setTimeout(alertsBounceLoop, 2500);
