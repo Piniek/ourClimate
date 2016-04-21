@@ -6,6 +6,7 @@ html, body {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
     background-color: #ccefff;
+	overflow: hidden;
 }
 *, *:before, *:after {
 	-webkit-box-sizing: inherit;
@@ -21,10 +22,57 @@ html, body {
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
 	z-index: 3;
-	display: none;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
 }
 #overlay.active {
-	display: block;
+	opacity: 1;
+	visibility: visible;
+}
+
+#popup {
+	width: 500px;
+	background: #fff;
+	padding: 10px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	visibility: hidden;
+	z-index: 5;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+#popup.active {
+	opacity: 1;
+	visibility: visible;
+}
+#popup .close {
+	position: absolute;
+	top: 0;
+	right: 4px;
+	cursor: pointer;
+}
+#popup .close:before {
+	font-family: 'FontAwesome';
+	content: "\f00d";
+}
+#popup h3 {
+	text-align: center;
+	margin: 0 0 8px 0;
+}
+#popup .desc {
+	margin: 0 0 8px 0;
+}
+#popup ul.options {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 /** Top **/
@@ -89,44 +137,63 @@ html, body {
 #history {
 	position: absolute;
 	padding-left: 20px;
-	background: #fff;
 	-webkit-transition: all 0.315s ease-out;
+	-moz-transition: all 0.315s ease-out;
 	transition: all 0.315s ease-out;
 }
 #history.active {
 	z-index: 5;
-	padding-right: 272px;
 }
-#history span {
+#history .title {
 	cursor: pointer;
 	margin-left: 18px;
 }
-#history span:before {
+#history .title:before {
 	content: "\f1ea";
 	font-family: 'FontAwesome';
 	position: absolute;
-	left: 6px;
 	top: 5px;
+	left: 6px;
 	-webkit-transition: content 0.3s ease-out;
+	-moz-transition: content 0.3s ease-out;
 	transition: content 0.3s ease-out;
 }
-#history.active span:before {
+#history.active .title:before {
 	content: "\f00d";
 	left: 14px;
 }
-#history ul {
+#history .filler {
+	background: #fff;
+	height: 35px;
+	width: 400px;
 	position: absolute;
+	top: 0;
 	left: -410px;
 	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	z-index: -1;
+}
+#history.active .filler {
+	left: -16px;
+}
+#history ul {
+	position: absolute;
+	top: 30px;
+	left: -410px;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
 	transition: all 0.3s ease-out;
 	list-style: none;
 	margin: 0;
 	width: 400px;
+	max-height: 100px;
+	overflow-y: scroll;
 	padding-top: 8px;
+	background: #fff;
 }
 #history.active ul {
 	left: -16px;
-	background: #fff;
 }
 #history ul li h4 {
 	font-size: 18px;

@@ -16,9 +16,20 @@
 		<script src="js/main.js" type="text/javascript"></script>
 	<body>
 		<div id="overlay"></div>
+		<div id="popup">
+			<div class="close"></div>
+			<h3>Sample question goes here</h3>
+			<div class="desc">Descriptions and stuff will go here</div>
+			<ul class="options">
+				<li><label><input type="radio" name="sample" /> Option 1</label></li>
+				<li><label><input type="radio" name="sample" /> Option 2</label></li>
+				<li><label><input type="radio" name="sample" /> Option 3</label></li>
+			</ul>
+		</div>
 		<div id="top">
 			<div id="history" data-step="1" data-intro="This will provide you with the history of your decisions">
-				<span>History</span>
+				<div class="title">History</div>
+				<div class="filler"></div>
 				<ul>
 					<li>
 						<h4>Sample Event</h4>
