@@ -23,14 +23,16 @@
         /** @var character string question type */
         private $type;
         
+        /** @var character string question threshold */
+        private $threshold;
+        
+        /** @var character string question location */
+        private $location;
+        
         /**
          * Question constructor.
-         *
-         * @param User    $owner
-         * @param Species $species
-         * @param string  $name
          */
-        public function __construct( $_id, $_title, $_text, $_provided_answer, $_acceptID, $_declineID, $_type )
+        public function __construct( $_id, $_title, $_text, $_provided_answer, $_acceptID, $_declineID, $_type, $_threshold, $_location )
         {
             $this->id         = $_id;
             $this->title      = $_title;
@@ -39,6 +41,8 @@
             $this->acceptID = $_acceptID;
             $this->declineID = $_declineID;
             $this->type = $_type;
+            $this->threshold = $_threshold;
+            $this->location = $_location;
         }
         
         /**
@@ -154,6 +158,38 @@
         }
         
         /**
+        * @return string $threshold
+        */
+        public function getThreshold()
+        {
+            return $this->threshold;   
+        }
+        
+        /**
+        * @param string $threshold
+        */
+        public function setThreshold( $threshold )
+        {
+            $this->threshold = $threshold;   
+        }
+        
+        /**
+        * @return string $location
+        */
+        public function getLocation()
+        {
+            return $this->location;   
+        }
+        
+        /**
+        * @param string $location
+        */
+        public function setLocation( $location )
+        {
+            $this->location = $location;   
+        }
+        
+        /**
      * Specify data which should be serialized to JSON
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -169,9 +205,12 @@
         'provided_answer'   =>  $this->provided_answer,
         'acceptID'  =>  $this->acceptID,
         'declineID' =>  $this->declineID,
-        'type'      =>  $this->type
+        'type'      =>  $this->type,
+        'threshold' =>  $this->threshold,
+        'location'  =>  $this->location
       ];
 
       return $array;
     }
     }
+?>

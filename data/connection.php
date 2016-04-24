@@ -128,3 +128,4 @@
       return $this->mysqli->error;
     }
   }
+?>

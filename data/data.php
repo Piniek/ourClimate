@@ -22,13 +22,14 @@
             $acceptID = null;
             $declineID = null;
             $type = null;
+            $threshold = null;
+            $location = null;
             
             $this->getAllAccDecQuestions->execute();
-            $this->getAllAccDecQuestions->bind_result( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type );
+            $this->getAllAccDecQuestions->bind_result( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location );
             
             while ( $this->getAllAccDecQuestions->fetch() )
             {
-                $newQuestion = new AccDecQuestions( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type );
                 
                 array_push( $ret, $newQuestion );
             }

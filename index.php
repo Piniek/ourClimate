@@ -3,8 +3,6 @@
 
     $data   = OurClimateData::getInstance();
     $questions = $data->getAccDecQuestions();
-    var_dump($questions);
-   
 ?>
 
 <!DOCTYPE html>
