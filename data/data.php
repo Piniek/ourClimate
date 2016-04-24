@@ -30,6 +30,7 @@
             
             while ( $this->getAllAccDecQuestions->fetch() )
             {
+                $newQuestion = new AccDecQuestion( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location );
                 
                 array_push( $ret, $newQuestion );
             }
