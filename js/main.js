@@ -43,3 +43,11 @@ function resize()
 	
 	$("#map").attr("height", winHeight+"pt");
 }
+
+function startTime() {
+    var today = new Date();
+    today.setSeconds(today.getSeconds());
+    
+    document.getElementById('txt').innerHTML = today.toDateString();
+    var t = setInterval(startTime, 500);
+}

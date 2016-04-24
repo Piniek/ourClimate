@@ -21,7 +21,7 @@
 		<script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
 		<script src="js/map.js" type="text/javascript"></script>
 		<script src="js/main.js" type="text/javascript"></script>
-	<body>
+	<body onload="startTime()">
 		<div id="overlay"></div>
         <div id="popup">
 			<div class="close"></div>
@@ -52,7 +52,7 @@
 					</li>
 				</ul>
 			</div>
-			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'>Date</div>
+			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'><div id="txt"></div></div>
 			<div id="menu">
 				<span>Menu</span>
 				<ul>
