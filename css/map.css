@@ -12,7 +12,7 @@
 	opacity: 1;
 }
 #svgContainer g:hover {
-	fill: #ccc;
+	fill: #0b1a28;
 	cursor: pointer;
 }
 #svgContainer.active g:hover {

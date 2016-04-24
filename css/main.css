@@ -5,8 +5,8 @@ html, body {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-    background-color: #ccefff;
-	overflow: hidden;
+    background-color: #b0d5e8;
+	
 }
 *, *:before, *:after {
 	-webkit-box-sizing: inherit;
@@ -80,6 +80,8 @@ html, body {
 	font-size: 24px;
     padding-top: 5px;
     padding-bottom: 40px;
+    background-color: #0b1a28;
+    color: white;
 }
 #current-date {
 	position:absolute;
@@ -112,6 +114,7 @@ html, body {
 }
 #menu.active ul {
 	right: -16px;
+    background-color: #0b1a28;
 }
 #menu ul li.about {
 
@@ -132,6 +135,9 @@ html, body {
 #menu ul li.restart:before {
 	content: "\f01e";
 }
+#menu ul a{
+	color: white;
+}
 
 
 #history {
@@ -143,6 +149,7 @@ html, body {
 }
 #history.active {
 	z-index: 5;
+    color: black;
 }
 #history .title {
 	cursor: pointer;
