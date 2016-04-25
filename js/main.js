@@ -28,8 +28,8 @@ $(function() {
 	  resize();
 	});
 	resize();
-	
-	setInterval(startTime, 500);
+	startTime();
+	setInterval(startTime, 40);
 });
 
 function resize()
@@ -49,7 +49,7 @@ function resize()
 var currDate = new Date();
 
 function startTime() {
-	$("#current-date").text(currDate.toDateString());
+	$("#current-date").text(currDate.toDateString().substring(4));
 	
 	var nextDay = new Date(currDate);
 	nextDay = nextDay.setDate(nextDay.getDate() + 1);
@@ -63,14 +63,23 @@ function startTime() {
 /*******************
 * Game Logic
 *	Game start, add 3 alerts, start off with randomly generated stats? Maybe random stats that are good?
+*		going to start with random stats that are comparable to today's stats
+*
 *	If a decision is made after X number of days, randomly choose a decision
 *		What should X be?
+*			Going to be 15 seconds, maybe make it slowly fade out in the past 7 seconds or change colors?
+*
 *	While a decision is being made (i.e., the popup is open), pause or slow down the time?
+*		decided to pause the time
+*
 *	Once a decision is made, update stats + images
-*	Every X number of days add 2 events (max at 6)
+*
+*	Every X number of days add 1 or 2 events (max at 6)
 *		If no events are available, immediately drop 2 or 3 events, and wait until 
 *			X number of days to add more (this resets the timer for dropping more events)
 *		What should X be?
+*			Every 45 seconds
+*
 *	Game is over when stats are too bad (thresholds needed for this) or when they run out of events
 *		Need to figure out how results should be shown
 *******************/
