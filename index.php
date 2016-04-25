@@ -3,8 +3,9 @@
 
     $data   = OurClimateData::getInstance();
     $questions = $data->getAccDecQuestions();
-	
-	//print_r($questions);
+
+    echo json_encode($questions);
+
 ?>
 
 <!DOCTYPE html>

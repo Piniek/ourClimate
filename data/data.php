@@ -32,7 +32,7 @@
             {
                 $newQuestion = new AccDecQuestion( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location );
                 
-                array_push( $ret, $newQuestion );
+                array_push( $ret, $newQuestion->jsonSerialize() );
             }
             
             return $ret;
