@@ -4,9 +4,9 @@
   class DatabaseConnection
   {
     private $host     = "localhost";
-    private $username = "username";
-    private $password = "password";
-    private $database = "";
+    private $username = "rand9382_climate";
+    private $password = "D*&Q8F;MF6NDTe]Vw4";
+    private $database = "rand9382_ourclimate";
 
     /**
      * @var mysqli MySQLi database connection object

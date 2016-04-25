@@ -28,6 +28,8 @@ $(function() {
 	  resize();
 	});
 	resize();
+	
+	setInterval(startTime, 500);
 });
 
 function resize()
@@ -49,5 +51,5 @@ function startTime() {
     today.setSeconds(today.getSeconds());
     
     document.getElementById('txt').innerHTML = today.toDateString();
-    var t = setInterval(startTime, 500);
+    //var t = setInterval(startTime, 500);
 }
