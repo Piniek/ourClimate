@@ -2,12 +2,17 @@
     
     require_once 'data/connection.php';
     require_once 'data/AccDecQuestions.php';
+    require_once 'data/AcceptDeclineStats.php';
     
     class OurClimateData
     {
         private $dbConnection;
         
         private $getAllAccDecQuestions;
+        
+        private $getAllAcceptStats;
+        
+        private $getAllDeclineStats;
         
         private static $instance;
         
@@ -33,6 +38,50 @@
                 $newQuestion = new AccDecQuestion( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location );
                 
                 array_push( $ret, $newQuestion->jsonSerialize() );
+            }
+            
+            return $ret;
+        }
+        
+        public function getAcceptStats() {
+            $ret = [ ];
+            
+            //AcceptDeclineStats variables
+            $id = null;
+            $temp_delta = null;
+            $forest_delta = null;
+            $co2_delta = null;
+            $sea_delta = null;
+            
+            $this->getAllAcceptStats->execute();
+            $this->getAllAcceptStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+            
+            while ( $this->getAllAcceptStats->fetch() )
+            {
+                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+                array_push( $ret, $newStat->jsonSerialize() );
+            }
+            
+            return $ret;
+        }
+        
+        public function getDeclineStats() {
+            $ret = [ ];
+            
+            //AcceptDeclineStats variables
+            $id = null;
+            $temp_delta = null;
+            $forest_delta = null;
+            $co2_delta = null;
+            $sea_delta = null;
+            
+            $this->getAllDeclineStats->execute();
+            $this->getAllDeclineStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+            
+            while ( $this->getAllDeclineStats->fetch() )
+            {
+                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+                array_push( $ret, $newStat->jsonSerialize() );
             }
             
             return $ret;
@@ -68,6 +117,8 @@
             $this->dbConnection = new DatabaseConnection();
             
             $this->getAllAccDecQuestions   = $this->dbConnection->prepare_statement( "SELECT * FROM `accdec_questions`" );
+            $this->getAllAcceptStats        = $this->dbConnection->prepare_statement( "SELECT * FROM `accepted_stats`" );
+            $this->getAllDeclineStats       = $this->dbConnection->prepare_statement( "SELECT * FROM `decline_stats`" );
         }
         
         /**
@@ -78,6 +129,14 @@
             if ( $this->getAllAccDecQuestions )
             {
                 $this->getAllAccDecQuestions->close();
+            }
+            if ( $this->getAllAcceptStats )
+            {
+                $this->getAllAcceptStats->close();   
+            }
+            if ( $this->getAllDeclineStats ) 
+            {
+                $this->getAllDeclineStats->close();
             }
         }
     }

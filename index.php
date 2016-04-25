@@ -2,9 +2,15 @@
     require_once 'data/data.php';
 
     $data   = OurClimateData::getInstance();
-    $questions = $data->getAccDecQuestions();
+    $questions = json_encode($data->getAccDecQuestions());
+    $accept_stats = json_encode($data->getAcceptStats());
+    $decline_stats = json_encode($data->getDeclineStats());
 
-    echo json_encode($questions);
+//    echo $questions;
+//    echo "\n--------\n";
+//    echo $accept_stats;
+//    echo "\n--------\n";
+//    echo $decline_stats;
 
 ?>
 
