@@ -5,12 +5,13 @@
     $questions = json_encode($data->getAccDecQuestions());
     $accept_stats = json_encode($data->getAcceptStats());
     $decline_stats = json_encode($data->getDeclineStats());
-
-//    echo $questions;
-//    echo "\n--------\n";
-//    echo $accept_stats;
-//    echo "\n--------\n";
-//    echo $decline_stats;
+	echo "<div style='display:none'>";
+    echo $questions;
+    echo "\n--------\n";
+    echo $accept_stats;
+    echo "\n--------\n";
+    echo $decline_stats;
+	echo "</div>";
 
 ?>
 

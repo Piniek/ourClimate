@@ -67,6 +67,7 @@ $(function() {
 		}
 	});*/
 	
+	return;
 	
 	$("#bounce").click(function() {
 		rand = Math.floor(Math.random() * gNumAlerts)+1;
@@ -110,7 +111,7 @@ $(function() {
 	
 	/** END DEV STUFF **/
 	
-	alertsBounceLoop();
+	//alertsBounceLoop();
 });
 
 function alertsBounceLoop()
@@ -122,7 +123,7 @@ function alertsBounceLoop()
 				bounce($(this));
 		});
 	}
-	setTimeout(alertsBounceLoop, 2500);
+	//setTimeout(alertsBounceLoop, 2500);
 }
 
 /*function scaleAlert2($elem, scaleTo)

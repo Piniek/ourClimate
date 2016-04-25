@@ -34,6 +34,8 @@ $(function() {
 	setInterval(startTime, 40);
 	
 	startGame();
+	
+	setInterval(alertsBounce, 2500);
 	setInterval(gameLoop, 100);
 	
 	$("#svgContainer").on("click", "g.svg-alert", function() {
@@ -87,16 +89,16 @@ function randomNum(min, max, dec)
 
 function updateStatsDOM()
 {
-	$("li.temp .change").text(gTemperature[2]+""+gTemperature[1]);
+	$("li.temp .change").text(gTemperature[2]+""+Math.abs(gTemperature[1]));
 	$("li.temp .info span").html(gTemperature[0] + "&deg;F");
 	
-	$("li.forest .change").text(gForests[2]+""+gForests[1]);
+	$("li.forest .change").text(gForests[2]+""+Math.abs(gForests[1]));
 	$("li.forest .info span").html(gForests[0]+ " km<sup>2</sup>");
 	
-	$("li.co2 .change").text(gCO2[2]+""+gCO2[1]);
+	$("li.co2 .change").text(gCO2[2]+""+Math.abs(gCO2[1]));
 	$("li.co2 .info span").text(gCO2[0]+" ppm");
 	
-	$("li.sea .change").text(gSea[2]+""+gSea[1]);
+	$("li.sea .change").text(gSea[2]+""+Math.abs(gSea[1]));
 	$("li.sea .info span").text(gSea[0]+" mm");
 }
 
@@ -132,21 +134,7 @@ function startGame()
 	
 	// Randomly pick 3 events, and drop them
 	
-	for(var i = 0; i < 3; i++)
-	{
-		var n = randomNum(0, events.length-1, 0)
-		
-		if(events[n]["gStatus"] == null) // if event hasn't been added yet, let's add it
-		{
-			// active on map
-			events[n]["gStatus"] = "active";
-			
-			// generate alert with given x y positions, and event id
-			newAlert(randomNum(100, 300, 0), randomNum(100, 300, 0), events[n]["id"]);
-		}
-		else // event has already been added, so keep looking
-			i--;
-	}
+	createEvents(3);
 	
 }
 
@@ -157,11 +145,19 @@ function newAlert(x, y, eventID)
 	$newAlert = $("#alert-1").clone();
 	gNumAlerts++;
 	
-	$newAlert.attr("transform", "translate(" + x + ",-100) scale(" + scaleVal + ")");
+	$newAlert.attr("transform", "translate(" + x + ",-"+ + y + ") scale(" + scaleVal + ")");
 	$newAlert.attr("id", "alert-"+gNumAlerts);
 	$newAlert.attr("data-event", eventID);
 	$newAlert.appendTo($("#svgContainer svg"));
 	$newAlert.show();
+}
+
+function alertsBounce()
+{
+	$(".svg-alert").each(function() {
+		if(!$(this).is(":hover"))
+			bounce($(this));
+	});
 }
 
 function openEvent(eventID)
@@ -223,7 +219,7 @@ function makeDecision(decision)
 		var declineID = events[i]["declineID"];
 		for(var j = 0; j < declines.length; j++)
 		{
-			if(declines[j]["id"] == declinetID)
+			if(declines[j]["id"] == declineID)
 				break;
 		}
 		
@@ -256,10 +252,60 @@ function makeDecision(decision)
 	events[i]["gStatus"] = "history";
 }
 
+function getSeconds(tracker, mills)
+{
+	return (tracker * mills) / 1000;
+}
+
+var gTimer = 0;
 function gameLoop()
 {
+	gTimer++;
 	
+	// checks if 45 seconds has passed yet
+	if(getSeconds(gTimer, 100) % 45 == 0)
+	{
+		var numEvents = randomNum(1, 2, 0);
+		
+		if($(".svg-alert").length >= 6)
+			return;
+		else if($(".svg-alert").length + numEvents > 6)
+		{
+			if(numEvents == 2)
+				numEvents = 1;
+			else
+				return;
+		}
+		
+		// create 1 or 2 events
+		createEvents(randomNum(1, 2, 0));
+	}
+	else if($(".svg-alert").length == 1) // no alerts are being shown (one alert is hidden for cloning)
+	{
+		createEvents(randomNum(2, 3, 0));
+	}
 }
+
+function createEvents(n)
+{
+	for(var i = 0; i < n; i++)
+	{
+		var n = randomNum(0, events.length-1, 0)
+		
+		if(events[n]["gStatus"] == null && events[n]["type"] != "passiv") // if event hasn't been added yet, let's add it
+		{
+			// active on map
+			events[n]["gStatus"] = "active";
+			
+			// generate alert with given x y positions, and event id
+			newAlert(randomNum(100, 300, 0), randomNum(50, 200, 0), events[n]["id"]);
+		}
+		else // event has already been added, so keep looking
+			i--;
+	}
+	alertsBounce();
+}
+
 
 
 function resize()
