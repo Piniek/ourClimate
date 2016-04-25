@@ -3,6 +3,8 @@
 
     $data   = OurClimateData::getInstance();
     $questions = $data->getAccDecQuestions();
+	
+	//print_r($questions);
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +54,8 @@
 					</li>
 				</ul>
 			</div>
-			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'><div id="txt"></div></div>
+			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'>
+			</div>
 			<div id="menu">
 				<span>Menu</span>
 				<ul>
@@ -72,36 +75,36 @@
 		<div id="bottom">
 			<ul>
 				<li class="temp">
+					<div class="graphic"><img src='./img/temperature/3.png' /></div>
 					<div class="change">+3.9</div>
 					<div class="info">
 						<h4>Global Temperature</h4>
 						<span>14 F since 1980</span>
 					</div>
-					<div class="graphic"></div>
 				</li>
-				<li class="forst">
+				<li class="forest">
+					<div class="graphic"><img src='./img/forests/3.png' /></div>
 					<div class="change">+3.9</div>
 					<div class="info">
 						<h4>Forests</h4>
 						<span>14 F since 1980</span>
 					</div>
-					<div class="graphic"></div>
 				</li>
 				<li class="co2">
+					<div class="graphic"><img src='./img/co2/3.png' /></div>
 					<div class="change">+3.9</div>
 					<div class="info">
 						<h4>Carbon Dioxide Level</h4>
 						<span>14 F since 1980</span>
 					</div>
-					<div class="graphic"></div>
 				</li>
 				<li class="sea">
+					<div class="graphic"><img src='./img/sea/5.png' /></div>
 					<div class="change">+3.9</div>
 					<div class="infa">
 						<h4>Sea Level</h4>
 						<span>14 F since 1980</span>
 					</div>
-					<div class="graphic"></div>
 				</li>
 			</ul>
 		</div>
