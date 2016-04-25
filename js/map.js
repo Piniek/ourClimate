@@ -24,7 +24,7 @@ $(function() {
 						};
 	var animTime = 200;
 	
-	$("#svgContainer").on("click", "g", function() {
+	/*$("#svgContainer").on("click", "g", function() {
 		return;
 		
 		if($(this).hasClass("svg-alert"))
@@ -65,7 +65,7 @@ $(function() {
 				$("#svgAnim-"+id)[0].beginElement();
 			}, animTime);
 		}
-	});
+	});*/
 	
 	
 	$("#bounce").click(function() {
