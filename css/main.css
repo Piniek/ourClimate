@@ -239,6 +239,10 @@ html, body {
 	display: inline-block;
 	position: relative;
 }
+#bottom ul li div.info {
+	text-align: center;
+	margin-left: 10px;
+}
 #bottom ul li div.change:before {
 	font-family: 'FontAwesome';
 	content: '-';
