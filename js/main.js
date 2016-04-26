@@ -1,3 +1,5 @@
+var gLoopInterval = 100;
+
 $(function() {
 	$("#menu span").click(function() {
 		$("#menu").toggleClass("active");
@@ -36,7 +38,7 @@ $(function() {
 	startGame();
 	
 	setInterval(alertsBounce, 2500);
-	setInterval(gameLoop, 100);
+	setInterval(gameLoop, gLoopInterval);
 	
 	$("#svgContainer").on("click", "g.svg-alert", function() {
 		$(this).addClass("open");
@@ -89,17 +91,53 @@ function randomNum(min, max, dec)
 
 function updateStatsDOM()
 {
+	// Temperature
 	$("li.temp .change").text(gTemperature[2]+""+Math.abs(gTemperature[1]));
-	$("li.temp .info span").html(gTemperature[0] + "&deg;F");
 	
+	if(gTemperature[2] == '-')
+		$("li.temp .change").removeClass("up").addClass("down");
+	else if(gTemperature[2] == '+')
+		$("li.temp .change").addClass("up").removeClass("down");
+	else
+		$("li.temp .change").removeClass("up").removeClass("down");
+	
+	$("li.temp .info span").html(gTemperature[0].toFixed(2) + "&deg;F");
+	
+	//Forest
 	$("li.forest .change").text(gForests[2]+""+Math.abs(gForests[1]));
-	$("li.forest .info span").html(gForests[0]+ " km<sup>2</sup>");
 	
+	if(gForests[2] == '-')
+		$("li.forest .change").removeClass("up").addClass("down");
+	else if(gForests[2] == '+')
+		$("li.forest .change").addClass("up").removeClass("down");
+	else
+		$("li.forest .change").removeClass("up").removeClass("down");
+	
+	$("li.forest .info span").html(gForests[0].toFixed(0)+ " km<sup>2</sup>");
+	
+	// CO2
 	$("li.co2 .change").text(gCO2[2]+""+Math.abs(gCO2[1]));
-	$("li.co2 .info span").text(gCO2[0]+" ppm");
 	
+	if(gCO2[2] == '-')
+		$("li.co2 .change").removeClass("up").addClass("down");
+	else if(gCO2[2] == '+')
+		$("li.co2 .change").addClass("up").removeClass("down");
+	else
+		$("li.co2 .change").removeClass("up").removeClass("down");
+	
+	$("li.co2 .info span").text(gCO2[0].toFixed(2)+" ppm");
+	
+	// Sea
 	$("li.sea .change").text(gSea[2]+""+Math.abs(gSea[1]));
-	$("li.sea .info span").text(gSea[0]+" mm");
+	
+	if(gSea[2] == '-')
+		$("li.sea .change").removeClass("up").addClass("down");
+	else if(gSea[2] == '+')
+		$("li.sea .change").addClass("up").removeClass("down");
+	else
+		$("li.sea .change").removeClass("up").removeClass("down");
+	
+	$("li.sea .info span").text(gSea[0].toFixed(2)+" mm");
 }
 
 var gTempature, gForests, gCO2, gSea;
@@ -237,9 +275,16 @@ function makeDecision(decision)
 	
 	// update the signs for each stat
 	gTemperature[2] = gTemperature[1] > 0 ? '+' : gTemperature[1] == 0 ? '' : '-';
+	gTemperature[1] = Math.abs(gTemperature[1]);
+	
 	gForests[2] = gForests[1] > 0 ? '+' : gForests[1] == 0 ? '' : '-';
+	gForests[1] = Math.abs(gForests[1]);
+	
 	gCO2[2] = gCO2[1] > 0 ? '+' : gCO2[1] == 0 ? '' : '-';
+	gCO2[1] = Math.abs(gCO2[1]);
+	
 	gSea[2] = gSea[1] > 0 ? '+' : gSea[1] == 0 ? '' : '-';
+	gSea[1] = Math.abs(gSea[1]);
 	
 	updateStatsDOM();
 	
@@ -263,7 +308,7 @@ function gameLoop()
 	gTimer++;
 	
 	// checks if 45 seconds has passed yet
-	if(getSeconds(gTimer, 100) % 45 == 0)
+	if(getSeconds(gTimer, gLoopInterval) % 45 == 0)
 	{
 		var numEvents = randomNum(1, 2, 0);
 		
@@ -337,6 +382,15 @@ function startTime() {
 	
     //document.getElementById('txt').innerHTML = today.toDateString();
     //var t = setInterval(startTime, 500);
+	
+	// update stats
+	
+	gTemperature[0] += (gTemperature[2] == '-' ? -1 : 1) * gTemperature[1] / (365);
+	gForests[0] += (gForests[2] == '-' ? -1 : 1) * gForests[1] / (365);
+	gCO2[0] += (gCO2[2] == '-' ? -1 : 1) * gCO2[1] / (365);
+	gSea[0] += (gSea[2] == '-' ? -1 : 1) * gSea[1] / (365);
+	
+	updateStatsDOM();
 }
 
 

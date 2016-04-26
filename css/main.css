@@ -238,12 +238,30 @@ html, body {
 }
 #bottom ul li div.change:before {
 	font-family: 'FontAwesome';
-	content: '\f176';
+	content: '-';
 	position: absolute;
 	top: -50px;
 	left: 50%;
 	transform: translate(-50%, 0);
 	font-size: 50px;
+}
+#bottom ul li.temp div.change.up:before,
+#bottom ul li.co2 div.change.up:before,
+#bottom ul li.sea div.change.up:before,
+#bottom ul li.forest div.change.down:before {
+	color: red;
+}
+#bottom ul li.temp div.change.down:before,
+#bottom ul li.co2 div.change.down:before,
+#bottom ul li.sea div.change.down:before,
+#bottom ul li.forest div.change.up:before {
+	color: green;
+}
+#bottom ul li div.change.up:before {
+	content: '\f176';
+}
+#bottom ul li div.change.down:before {
+	content: '\f175';
 }
 #bottom ul li div.graphic img {
 	width: 60px;
