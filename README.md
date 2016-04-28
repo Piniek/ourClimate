@@ -7,3 +7,6 @@ Things to be done:
 - Accept/Decline new window explaining results
 - Add descriptions of results to DB to put in window above
 - Implement Restart button at the top
+
+Bugs:
+- Open a pin, Close pin. Open another pin, Accept/Decline. Both pins disappear
