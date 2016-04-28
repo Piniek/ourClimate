@@ -140,7 +140,7 @@ function updateStatsDOM()
 	$("li.sea .info span").text(gSea[0].toFixed(2)+" mm");
 }
 
-var gTempature, gForests, gCO2, gSea;
+var gTemperature, gForests, gCO2, gSea; //Changed this from var gTampature (spelling was wrong)
 gTemperature = [0, 0, ''];
 gForests = [0, 0, ''];
 gCO2 = [0, 0, ''];

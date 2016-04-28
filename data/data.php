@@ -52,13 +52,14 @@
             $forest_delta = null;
             $co2_delta = null;
             $sea_delta = null;
+            $results = null;
             
             $this->getAllAcceptStats->execute();
-            $this->getAllAcceptStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+            $this->getAllAcceptStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
             
             while ( $this->getAllAcceptStats->fetch() )
             {
-                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
                 array_push( $ret, $newStat->jsonSerialize() );
             }
             
@@ -74,13 +75,14 @@
             $forest_delta = null;
             $co2_delta = null;
             $sea_delta = null;
+            $results = null;
             
             $this->getAllDeclineStats->execute();
-            $this->getAllDeclineStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+            $this->getAllDeclineStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
             
             while ( $this->getAllDeclineStats->fetch() )
             {
-                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta );
+                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
                 array_push( $ret, $newStat->jsonSerialize() );
             }
             
