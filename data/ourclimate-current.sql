@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2016 at 06:14 PM
+-- Generation Time: Apr 28, 2016 at 10:43 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ourclimate`
 --
-CREATE DATABASE IF NOT EXISTS `ourclimate` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `ourclimate`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +26,6 @@ USE `ourclimate`;
 -- Table structure for table `accdec_questions`
 --
 
-DROP TABLE IF EXISTS `accdec_questions`;
 CREATE TABLE IF NOT EXISTS `accdec_questions` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
@@ -40,10 +37,6 @@ CREATE TABLE IF NOT EXISTS `accdec_questions` (
   `threshold` varchar(50) DEFAULT NULL,
   `location` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `accdec_questions`:
---
 
 --
 -- Dumping data for table `accdec_questions`
@@ -77,28 +70,24 @@ INSERT INTO `accdec_questions` (`id`, `title`, `text`, `provided_answer`, `accep
 -- Table structure for table `accepted_stats`
 --
 
-DROP TABLE IF EXISTS `accepted_stats`;
 CREATE TABLE IF NOT EXISTS `accepted_stats` (
   `id` int(11) NOT NULL,
   `temp_delta` int(11) NOT NULL,
   `forest_delta` int(11) NOT NULL,
   `co2_delta` int(11) NOT NULL,
-  `sea_delta` int(11) NOT NULL
+  `sea_delta` int(11) NOT NULL,
+  `results` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `accepted_stats`:
---
 
 --
 -- Dumping data for table `accepted_stats`
 --
 
-INSERT INTO `accepted_stats` (`id`, `temp_delta`, `forest_delta`, `co2_delta`, `sea_delta`) VALUES
-(1, 0, 0, 0, 0),
-(2, 0, 0, -100, 0),
-(3, 0, 1, -100, 0),
-(4, 0, 0, -1000, 0);
+INSERT INTO `accepted_stats` (`id`, `temp_delta`, `forest_delta`, `co2_delta`, `sea_delta`, `results`) VALUES
+(1, 0, 0, 0, 0, ''),
+(2, 0, 0, -100, 0, ''),
+(3, 0, 1, -100, 0, ''),
+(4, 0, 0, -1000, 0, '');
 
 -- --------------------------------------------------------
 
@@ -106,25 +95,21 @@ INSERT INTO `accepted_stats` (`id`, `temp_delta`, `forest_delta`, `co2_delta`, `
 -- Table structure for table `decline_stats`
 --
 
-DROP TABLE IF EXISTS `decline_stats`;
 CREATE TABLE IF NOT EXISTS `decline_stats` (
   `id` int(11) NOT NULL,
   `temp_delta` int(11) NOT NULL,
   `forest_delta` int(11) NOT NULL,
   `co2_delta` int(11) NOT NULL,
-  `sea_delta` int(11) NOT NULL
+  `sea_delta` int(11) NOT NULL,
+  `results` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `decline_stats`:
---
 
 --
 -- Dumping data for table `decline_stats`
 --
 
-INSERT INTO `decline_stats` (`id`, `temp_delta`, `forest_delta`, `co2_delta`, `sea_delta`) VALUES
-(1, 0, 0, 0, 0);
+INSERT INTO `decline_stats` (`id`, `temp_delta`, `forest_delta`, `co2_delta`, `sea_delta`, `results`) VALUES
+(1, 0, 0, 0, 0, '');
 
 --
 -- Indexes for dumped tables
