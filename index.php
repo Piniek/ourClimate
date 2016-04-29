@@ -45,6 +45,11 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 		
 		<script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
 		<script src="js/map.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var events = <?php echo $questions; ?>;
+			var accepts = <?php echo $accept_stats; ?>;
+			var declines = <?php echo $decline_stats; ?>;
+		</script>
 		<script src="js/main.js" type="text/javascript"></script>
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -78,17 +83,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 				<div class="title">History</div>
                 <div class="filler"></div>
 				<ul>
-					<li>
-						<h4>Sample Event</h4>
-						<div>Omigawd someone blew up the dam!</div>
-					</li>
-                    <li>
-						<h4>Sample Event 2</h4>
-						<div>Omigawd Michael Jackson is alive!</div>
-					</li>
-					<li>
-						<h4>Sample Event 3</h4>
-						<div>Nvm that's just Morgan Freeman!</div>
+					<li class="start">
+						<h4>Welcome!</h4>
+						<div>Make a decision, and they'll start showing up here.</div>
 					</li>
 				</ul>
 			</div>

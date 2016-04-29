@@ -6,6 +6,9 @@ $(function() {
 	});
 	
 	$("#history .title").click(function() {
+		if(!$("#history").hasClass("active"))
+			$("#history ul").scrollTop(0);
+		
 		$("#history").toggleClass("active");
 		$("#overlay").toggleClass("active");
 	});
@@ -14,6 +17,7 @@ $(function() {
 		$(this).removeClass("active");
 		$("#history").removeClass("active");
 		$("#popup").removeClass("active");
+		$(".svg-alert.open").removeClass("open");
 		gPause = 0;
 	});
 	
@@ -22,9 +26,14 @@ $(function() {
 		$("#overlay").addClass("active");
 	});*/
 	
+	$("li.restart").click(function() {
+		restartGame();
+	});
+	
 	$("#popup .close").click(function() {
 		$("#popup").removeClass("active");
 		$("#overlay").removeClass("active");
+		$(".svg-alert.open").removeClass("open");
 		gPause = 0;
 	});
 	
@@ -50,39 +59,6 @@ $(function() {
 	});
 	
 });
-
-var events = [
-					{"id":1,"title":"Limit Transportation","text":"Request for the limit of 1 automobile per household. Fines will be issued for the breaking of this law.\r\n","provided_answer":null,"acceptID":2,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":2,"title":"Eliminate Subsidies for Fuel Use\r\n","text":"Eliminating these subsidies could reduce energy use and decrease carbon emission levels. \r\n","provided_answer":null,"acceptID":2,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":3,"title":"Reduce Regulatory Barriers for New Nuclear Power Plants\r\n","text":"Allowing more nuclear power plants to be made will cut back on other traditional energy sources which have high co2 emission rates. \r\n","provided_answer":null,"acceptID":2,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":4,"title":"Create Forest Management Institutions\r\n","text":"Decreasing Wildfires and having more regulated forest management could lead to a decrease in CO2 emissions. \r\n","provided_answer":null,"acceptID":3,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":5,"title":"Invest in Biotechnology\r\n","text":"It could be possible to use biotechnology to create tress that will absorb CO2 faster, as well as create crops that can thrive in a post climate change environment. \r\n","provided_answer":null,"acceptID":2,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":6,"title":"Repeal the National Flood Insurance Program\r\n","text":"Now that the sea level is so high, floods will be commonplace. If you remove the insurance it will encourage people to leave because of the impending floods. \r\n","provided_answer":null,"acceptID":1,"declineID":1,"type":"accdec","threshold":"{\"sea\", \"33\", \"+\"}","location":"america", "gStatus": null},
-					{"id":7,"title":"Increase use of Congestion Pricing on Toll Roads\r\n","text":"Congestion Pricing will encourage people to carpool, thereby lowering the c02 emission rates.\r\n","provided_answer":null,"acceptID":2,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":8,"title":"Subsidize the Replacement of Older Automobiles\r\n","text":"If the trade in of older cars was encouraged we could replace them with more fuel efficient vehicles.\r\n","provided_answer":null,"acceptID":2,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":9,"title":"Reform Air Traffic Control Systems\r\n","text":"The current system has many planes using holding patterns and runway delays, reform so that more direct routes become available, decreasing the amount of time that the planes are in the air. \r\n","provided_answer":null,"acceptID":2,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":10,"title":"Remove environmental regulations for new energy facilities\r\n","text":"Reducing these could possibly allow more old facilities to be replaced with new, cleaner ones.\r\n","provided_answer":null,"acceptID":3,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":11,"title":"Subsidize Research for New Technologies\r\n","text":"Subsidizing research for new technologies related to climate change will incentivize more researchers to get involved. \r\n","provided_answer":null,"acceptID":1,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":12,"title":"Expand and Modernize the Electric Grid\r\n","text":"This will allow for more use of solar and wind energy, decreasing use of fossil fuels. \r\n","provided_answer":null,"acceptID":3,"declineID":1,"type":"accdec","threshold":null,"location":"america", "gStatus": null},
-					{"id":13,"title":"The Kyoto Protocol","text":"A worldwide effort to reduce CO2 emissions, signed by many different countries. \r\n","provided_answer":null,"acceptID":4,"declineID":1,"type":"accdec","threshold":null,"location":"japan", "gStatus": null},
-					{"id":14,"title":"Subsidize purchases of electric cars ","text":"Electric cars, when powered by nuclear energy, have much less emission rates than traditional cars. Subsidizing the use would enourage more adopters. ","provided_answer":null,"acceptID":3,"declineID":1,"type":"accdec","threshold":null,"location":null, "gStatus": null},
-					{"id":15,"title":"Massive Flooding","text":"The sea has gotten to a point where massive flooding can be seen, and people have begun moving inland. ","provided_answer":null,"acceptID":1,"declineID":1,"type":"passiv","threshold":"{\"sea\", \"40\", \"+\"}","location":null, "gStatus": null},
-					{"id":16,"title":"Technology Breakthrough","text":"Thanks to research subsidies, there has been a techonological breakthrough that significantly decreases CO2 emissions.","provided_answer":null,"acceptID":1,"declineID":1,"type":"passiv","threshold":null,"location":null, "gStatus": null},
-					{"id":17,"title":"Widespread Droughts","text":"Droughts are becoming a huge problem throughout the world due to the rising temperature.","provided_answer":null,"acceptID":1,"declineID":1,"type":"passiv","threshold":"{\"temperature\", \"32\", \"+\"}","location":null, "gStatus": null},
-					{"id":18,"title":"Nuisance Flooding","text":"With the sea level at its current state, nuisance flooding will be a common occurrence. Flooding now occurs frequently only when confronted with high tide conditions.","provided_answer":null,"acceptID":1,"declineID":1,"type":"passiv","threshold":"{\"sea\", \"32\", \"+\"}","location":null, "gStatus": null},
-					{"id":19,"title":"Air Pollution","text":"The rising temperatures have caused significant air pollution by increasing the ground level ozone. People could begin feeling the effects of this.","provided_answer":null,"acceptID":1,"declineID":1,"type":"passiv","threshold":"{\"temperature\", \"36\", \"+\"}","location":null, "gStatus": null}
-				];
-				
-var accepts = [
-					{"id":1,"temp_delta":0,"forest_delta":0,"co2_delta":0,"sea_delta":0},
-					{"id":2,"temp_delta":0,"forest_delta":0,"co2_delta":-100,"sea_delta":0},
-					{"id":3,"temp_delta":0,"forest_delta":1,"co2_delta":-100,"sea_delta":0},
-					{"id":4,"temp_delta":0,"forest_delta":0,"co2_delta":-1000,"sea_delta":0}
-				];
-
-var declines = [
-					{"id":1,"temp_delta":0,"forest_delta":0,"co2_delta":0,"sea_delta":0}
-				];
 				
 function randomNum(min, max, dec)
 {
@@ -92,7 +68,7 @@ function randomNum(min, max, dec)
 function updateStatsDOM()
 {
 	// Temperature
-	$("li.temp .change").text(gTemperature[2]+""+Math.abs(gTemperature[1]));
+	$("li.temp .change").text(gTemperature[2]+""+Math.abs(gTemperature[1]).toFixed(2));
 	
 	if(gTemperature[2] == '-')
 		$("li.temp .change").removeClass("up").addClass("down");
@@ -116,7 +92,7 @@ function updateStatsDOM()
 	$("li.forest .info span").html(gForests[0].toFixed(0)+ " km<sup>2</sup>");
 	
 	// CO2
-	$("li.co2 .change").text(gCO2[2]+""+Math.abs(gCO2[1]));
+	$("li.co2 .change").text(gCO2[2]+""+Math.abs(gCO2[1]).toFixed(2));
 	
 	if(gCO2[2] == '-')
 		$("li.co2 .change").removeClass("up").addClass("down");
@@ -128,7 +104,7 @@ function updateStatsDOM()
 	$("li.co2 .info span").text(gCO2[0].toFixed(2)+" ppm");
 	
 	// Sea
-	$("li.sea .change").text(gSea[2]+""+Math.abs(gSea[1]));
+	$("li.sea .change").text(gSea[2]+""+Math.abs(gSea[1]).toFixed(2));
 	
 	if(gSea[2] == '-')
 		$("li.sea .change").removeClass("up").addClass("down");
@@ -174,6 +150,30 @@ function startGame()
 	
 	createEvents(3);
 	
+}
+
+function restartGame()
+{
+	for(var i = 0; i < events.length; i++)
+	{
+		events[i]["gStatus"] = null;
+	}
+	
+	$("#history ul li").each(function() {
+		if($(this).hasClass("start"))
+			$(this).show();
+		else
+			$(this).remove();
+	});
+	
+	$(".svg-alert").each(function() {
+		if($(this).attr("id") != "alert-1")
+			$(this).remove();
+	});
+	
+	currDate = new Date();
+	
+	startGame();
 }
 
 var gNumAlerts = 1;
@@ -251,6 +251,7 @@ function makeDecision(decision)
 		co2_delta = accepts[j]["co2_delta"];
 		sea_delta = accepts[j]["sea_delta"];
 		
+		events[i]["gStatus"] = "accepted";
 	}
 	else if(decision == "decline")
 	{
@@ -264,7 +265,9 @@ function makeDecision(decision)
 		temp_delta = declines[j]["temp_delta"];
 		forests_delta = declines[j]["forest_delta"];
 		co2_delta = declines[j]["co2_delta"];
-		sea_delta = declines[j]["sea_delta"];	
+		sea_delta = declines[j]["sea_delta"];
+
+		events[i]["gStatus"] = "declined";
 	}
 	
 	// apply delta to rate of change
@@ -273,12 +276,19 @@ function makeDecision(decision)
 	gCO2[1] += co2_delta;
 	gSea[1] += sea_delta;
 	
+	console.log("----");
+	console.log("Temperature: "+gTemperature);
+	console.log("Forests: "+gForests);
+	console.log("CO2: "+gCO2);
+	console.log("Sea: "+gSea);
+	console.log("----");
+	
 	// update the signs for each stat
 	gTemperature[2] = gTemperature[1] > 0 ? '+' : gTemperature[1] == 0 ? '' : '-';
 	gTemperature[1] = Math.abs(gTemperature[1]);
 	
 	gForests[2] = gForests[1] > 0 ? '+' : gForests[1] == 0 ? '' : '-';
-	gForests[1] = Math.abs(gForests[1]);
+	gForests[1] = Math.round(Math.abs(gForests[1]));
 	
 	gCO2[2] = gCO2[1] > 0 ? '+' : gCO2[1] == 0 ? '' : '-';
 	gCO2[1] = Math.abs(gCO2[1]);
@@ -286,7 +296,18 @@ function makeDecision(decision)
 	gSea[2] = gSea[1] > 0 ? '+' : gSea[1] == 0 ? '' : '-';
 	gSea[1] = Math.abs(gSea[1]);
 	
+	console.log("----");
+	console.log("Temperature: "+gTemperature);
+	console.log("Forests: "+gForests);
+	console.log("CO2: "+gCO2);
+	console.log("Sea: "+gSea);
+	console.log("----");
+	
 	updateStatsDOM();
+	
+	// add event to history
+	$("#history ul li.start").hide();
+	$("#history ul").prepend("<li class=\""+events[i]["gStatus"]+"\"><h4>"+events[i]["title"]+"</h4><div>"+events[i]["text"]+"</div></li>");
 	
 	// close popup and remove alert
 	$("#popup").removeClass("active");
@@ -294,7 +315,6 @@ function makeDecision(decision)
 	gPause = 0;
 	
 	$(".svg-alert.open").remove();
-	events[i]["gStatus"] = "history";
 }
 
 function getSeconds(tracker, mills)

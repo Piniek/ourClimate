@@ -1,7 +1,7 @@
 <?php
     $db_connection = array();
 	
-	$local = 1; // change this to go back and forth between local
+	$local = 0; // change this to go back and forth between local
 	
 	if($local)
 	{

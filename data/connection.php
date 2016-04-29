@@ -90,6 +90,14 @@
         {
           throw new Exception( "Cannot Connect to " . $this->host );
         }
+		/*else
+		{
+			// sets default character set connection to utf8 for JSON
+			if(!$this->mysqli->set_charset("utf8"))
+			{
+				throw new Exception( "Failed to set charset to utf8: " . $this->mysqli->error );
+			}
+		}*/
       }
       catch ( Exception $e )
       {
