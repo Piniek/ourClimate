@@ -14,11 +14,7 @@ $(function() {
 	});
 	
 	$("#overlay").click(function() {
-		$(this).removeClass("active");
-		$("#history").removeClass("active");
-		$("#popup").removeClass("active");
-		$(".svg-alert.open").removeClass("open");
-		gPause = 0;
+		closePopup();
 	});
 	
 	/*$(".svg-alert").click(function() {
@@ -27,14 +23,12 @@ $(function() {
 	});*/
 	
 	$("li.restart").click(function() {
-		restartGame();
+		gPause = 1;
+		openPopup("Restart Game", "Are you sure? This cannot be undone!", "accdec");
 	});
 	
 	$("#popup .close").click(function() {
-		$("#popup").removeClass("active");
-		$("#overlay").removeClass("active");
-		$(".svg-alert.open").removeClass("open");
-		gPause = 0;
+		closePopup();
 	});
 	
 	$(window).resize(function() {
@@ -55,10 +49,24 @@ $(function() {
 	});
 	
 	$("#popup .accdec div").click(function() {
-		makeDecision($(this).attr("class"));
+		if($(".svg-alert.open").length == 1)
+			makeDecision($(this).attr("class"));
+		else
+			restartGame($(this).attr("class"));
+		
+		closePopup();
 	});
 	
 });
+
+function closePopup()
+{
+	$("#history").removeClass("active");
+	$("#popup").removeClass("active");
+	$("#overlay").removeClass("active");
+	$(".svg-alert.open").removeClass("open");
+	gPause = 0;
+}
 				
 function randomNum(min, max, dec)
 {
@@ -152,8 +160,14 @@ function startGame()
 	
 }
 
-function restartGame()
+function restartGame(decision)
 {
+	if(decision == "decline")
+	{
+		closePopup();
+		return;
+	}
+	
 	for(var i = 0; i < events.length; i++)
 	{
 		events[i]["gStatus"] = null;
@@ -192,10 +206,33 @@ function newAlert(x, y, eventID)
 
 function alertsBounce()
 {
+	if(gPause)
+		return;
+	
 	$(".svg-alert").each(function() {
 		if(!$(this).is(":hover"))
 			bounce($(this));
 	});
+}
+
+function openPopup(title, text, opts)
+{
+	$("#popup h3").text(title);
+	$("#popup .desc").text(text);
+	
+	if(opts == "accdec")
+	{
+		$("#popup .accdec").show();
+		$("#popup .options").hide();
+	}
+	else
+	{
+		$("#popup .accdec").hide();
+		$("#popup .options").show();
+	}
+	
+	$("#popup").addClass("active");
+	$("#overlay").addClass("active");
 }
 
 function openEvent(eventID)
@@ -211,18 +248,7 @@ function openEvent(eventID)
 	
 	gPause = 1;
 	
-	$("#popup h3").text(events[i]["title"]);
-	$("#popup .desc").text(events[i]["text"]);
-	
-	
-	if(events[i]["type"] == "accdec")
-	{
-		$("#popup .accdec").show();
-		$("#popup .options").hide();
-	}
-	
-	$("#popup").addClass("active");
-	$("#overlay").addClass("active");
+	openPopup(events[i]["title"], events[i]["text"], events[i]["type"]);
 }
 
 function makeDecision(decision)
@@ -309,9 +335,7 @@ function makeDecision(decision)
 	$("#history ul li.start").hide();
 	$("#history ul").prepend("<li class=\""+events[i]["gStatus"]+"\"><h4>"+events[i]["title"]+"</h4><div>"+events[i]["text"]+"</div></li>");
 	
-	// close popup and remove alert
-	$("#popup").removeClass("active");
-	$("#overlay").removeClass("active");
+	// resume game
 	gPause = 0;
 	
 	$(".svg-alert.open").remove();
