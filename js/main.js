@@ -23,11 +23,14 @@ $(function() {
 	});*/
 	
 	$("li.restart").click(function() {
-		gPause = 1;
 		openPopup("Restart Game", "Are you sure? This cannot be undone!", "accdec");
 	});
 	
 	$("#popup .close").click(function() {
+		closePopup();
+	});
+	
+	$("#popup .opts .confirm").click(function() {
 		closePopup();
 	});
 	
@@ -50,7 +53,7 @@ $(function() {
 	
 	$("#popup .accdec div").click(function() {
 		if($(".svg-alert.open").length == 1)
-			makeDecision($(this).attr("class"));
+			makeDecision($(this).attr("class"), parseInt($(".svg-alert.open").attr("data-event")));
 		else
 			restartGame($(this).attr("class"));
 		
@@ -129,6 +132,7 @@ gTemperature = [0, 0, ''];
 gForests = [0, 0, ''];
 gCO2 = [0, 0, ''];
 gSea = [0, 0, ''];
+gOrigStats = {"temperature": 0, "forests": 0, "co2": 0, "sea": 0};
 
 function startGame()
 {
@@ -150,6 +154,11 @@ function startGame()
 	
 	//http://climate.nasa.gov/vital-signs/sea-level/
 	gSea = [randomNum(72, 78, 2), randomNum(2, 4, 2), '+']; //use mm for units
+	
+	gOrigStats["temperature"] = gTemperature[0];
+	gOrigStats["forests"] = gForests[0];
+	gOrigStats["co2"] = gCO2[0];
+	gOrigStats["sea"] = gSea[0];
 	
 	// Update stats on DOM
 	updateStatsDOM();
@@ -217,19 +226,15 @@ function alertsBounce()
 
 function openPopup(title, text, opts)
 {
+	gPause = 1;
+	
 	$("#popup h3").text(title);
 	$("#popup .desc").text(text);
 	
-	if(opts == "accdec")
-	{
-		$("#popup .accdec").show();
-		$("#popup .options").hide();
-	}
-	else
-	{
-		$("#popup .accdec").hide();
-		$("#popup .options").show();
-	}
+	$("#popup .opts > *").hide();
+	
+	if(opts != "")
+		$("#popup .opts ."+opts).show();
 	
 	$("#popup").addClass("active");
 	$("#overlay").addClass("active");
@@ -246,14 +251,11 @@ function openEvent(eventID)
 	if(i == events.length)
 		return;
 	
-	gPause = 1;
-	
 	openPopup(events[i]["title"], events[i]["text"], events[i]["type"]);
 }
 
-function makeDecision(decision)
+function makeDecision(decision, eventID)
 {
-	var eventID = parseInt($(".svg-alert.open").attr("data-event"));
 	
 	for(var i = 0; i < events.length; i++)
 	{
@@ -335,9 +337,6 @@ function makeDecision(decision)
 	$("#history ul li.start").hide();
 	$("#history ul").prepend("<li class=\""+events[i]["gStatus"]+"\"><h4>"+events[i]["title"]+"</h4><div>"+events[i]["text"]+"</div></li>");
 	
-	// resume game
-	gPause = 0;
-	
 	$(".svg-alert.open").remove();
 }
 
@@ -349,6 +348,9 @@ function getSeconds(tracker, mills)
 var gTimer = 0;
 function gameLoop()
 {
+	if(gPause)
+		return;
+	
 	gTimer++;
 	
 	// checks if 45 seconds has passed yet
@@ -373,6 +375,118 @@ function gameLoop()
 	{
 		createEvents(randomNum(2, 3, 0));
 	}
+	
+	// check for passive events
+	var threshold;
+	for(var i = 0; i < events.length; i++)
+	{
+		// skip if event is not passive
+		if(events[i]["type"] != "passiv" || events[i]["gStatus"] != null)
+			continue;
+		
+		// if no threshold, then generate a random number to see if we should fire it now
+		if(events[i]["threshold"] == null)
+		{
+			if(events[i]["gStatus"] != null)
+				continue;
+			
+			var rand = randomNum(0, 100, 0);
+			
+			if(rand < 2)
+				events[i]["gStatus"] = "fired";
+		}
+		else
+		{
+			// grab threshold info
+			threshold = events[i]["threshold"].match(/"(.*?)"/g);
+			for(var j = 0; j < threshold.length; j++)
+				threshold[j] = threshold[j].replace(/"/g, "");
+			
+			
+			// check if threshold has been met
+			switch(threshold[0])
+			{
+				case "temperature":
+					if(threshold[2] == "+")
+					{
+						if(gTemperature[0] > threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					else
+					{
+						if(gTemperature[0] < threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					break;
+				case "sea":
+					if(threshold[2] == "+")
+					{
+						if(gSea[0] > threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					else
+					{
+						if(gSea[0] < threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					break;
+				case "co2":
+					if(threshold[2] == "+")
+					{
+						if(gCO2[0] > threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					else
+					{
+						if(gCO2[0] < threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					break;
+				case "forests":
+					if(threshold[2] == "+")
+					{
+						if(gForests[0] > threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					else
+					{
+						if(gForests[0] < threshold[1])
+							events[i]["gStatus"] = "fired";
+					}
+					break;
+			}
+			
+		}
+		
+		// if event is fired, then set a timeout for it
+		if(events[i]["gStatus"] == "fired")
+		{
+			(function(eventID)
+			{
+				setTimeout(function() {
+					fireEvent(eventID);
+				}, randomNum(3000, 15000, 0));
+			})(i);
+		}
+		
+	}
+	
+}
+
+function fireEvent(eventID)
+{
+	// in case another event is already open, delay this one
+	if($("#popup").hasClass("active"))
+	{
+		setTimeout(function() { fireEvent(eventID); }, 7000);
+		return;
+	}
+	
+	// show event
+	openPopup(events[eventID]["title"], events[eventID]["text"], "confirm");
+	
+	// update stats + add event to history
+	makeDecision("accept", events[eventID]["id"]);
 }
 
 function createEvents(n)

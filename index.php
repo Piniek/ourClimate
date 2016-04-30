@@ -68,14 +68,17 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 			<div class="close"></div>
 			<h3>Sample question goes here</h3>
 			<div class="desc">Descriptions and stuff will go here</div>
-			<ul class="options">
-				<li><label><input type="radio" name="sample" /> Option 1</label></li>
-				<li><label><input type="radio" name="sample" /> Option 2</label></li>
-				<li><label><input type="radio" name="sample" /> Option 3</label></li>
-			</ul>
-			<div class="accdec">
-				<div class="accept">Accept</div>
-				<div class="decline">Decline</div>
+			<div class="opts">
+				<ul class="options">
+					<li><label><input type="radio" name="sample" /> Option 1</label></li>
+					<li><label><input type="radio" name="sample" /> Option 2</label></li>
+					<li><label><input type="radio" name="sample" /> Option 3</label></li>
+				</ul>
+				<div class="accdec">
+					<div class="accept">Accept</div>
+					<div class="decline">Decline</div>
+				</div>
+				<div class="confirm">Okay</div>
 			</div>
 		</div>
 		<div id="top">
