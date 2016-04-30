@@ -38,13 +38,9 @@ $(function() {
 	  resize();
 	});
 	resize();
+	
 	startTime();
-	setInterval(startTime, 40);
-	
-	startGame();
-	
-	setInterval(alertsBounce, 2500);
-	setInterval(gameLoop, gLoopInterval);
+	showIntro();
 	
 	$("#svgContainer").on("click", "g.svg-alert", function() {
 		$(this).addClass("open");
@@ -61,6 +57,12 @@ $(function() {
 	});
 	
 });
+var gIntro = 0;
+function showIntro()
+{
+	gIntro = 1;
+	openPopup("Welcome!", "Hi, welcome to the ourClimate app. Someone please write this intro, i'm bad at this. We're gonna show you tooltips once you click okay", "confirm");
+}
 
 function closePopup()
 {
@@ -69,6 +71,13 @@ function closePopup()
 	$("#overlay").removeClass("active");
 	$(".svg-alert.open").removeClass("open");
 	gPause = 0;
+	
+	if(gIntro)
+	{
+		introJs().start();
+		gIntro = 0;
+		setTimeout(startGame, 500);
+	}
 }
 				
 function randomNum(min, max, dec)
@@ -136,7 +145,12 @@ gOrigStats = {"temperature": 0, "forests": 0, "co2": 0, "sea": 0};
 
 function startGame()
 {
-	
+	// tool tips intro still open, so wait
+	if($(".introjs-overlay").length == 1)
+	{
+		setTimeout(startGame, 200);
+		return;
+	}
 	// Randomly generate stats (sources provided)
 	
 	// all rate of change are per year
@@ -162,6 +176,16 @@ function startGame()
 	
 	// Update stats on DOM
 	updateStatsDOM();
+	
+	// start timer
+	//startTime();
+	setInterval(startTime, 40);
+	
+	// alerts bouncing
+	setInterval(alertsBounce, 2500);
+	// official game loop
+	setInterval(gameLoop, gLoopInterval);
+	
 	
 	// Randomly pick 3 events, and drop them
 	
