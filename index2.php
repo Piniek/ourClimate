@@ -45,6 +45,11 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 		
 		<script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
 		<script src="js/map.js" type="text/javascript"></script>
+        <script type="text/javascript">
+			var events = <?php echo $questions; ?>;
+			var accepts = <?php echo $accept_stats; ?>;
+			var declines = <?php echo $decline_stats; ?>;
+		</script>
 		<script src="js/main.js" type="text/javascript"></script>
         <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
