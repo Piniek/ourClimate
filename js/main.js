@@ -61,7 +61,7 @@ var gIntro = 0;
 function showIntro()
 {
 	gIntro = 1;
-	openPopup("Welcome!", "Hi, welcome to the ourClimate app. Someone please write this intro, i'm bad at this. We're gonna show you tooltips once you click okay", "confirm");
+	openPopup("Welcome!", "Hi, welcome to the ourClimate app. ourClimate will challenge you with real world issues that arise everyday. You will control the environment through a number of law making decisions. We will get you started with a quick tutorial.", "confirm");
 }
 
 function closePopup()
