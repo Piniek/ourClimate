@@ -310,7 +310,7 @@ html, body {
   text-decoration: none;
 }
 
-.accept {
+.accept, .confirm {
     background: #0ad100;
     background-image: -webkit-linear-gradient(top, #0ad100, #134d00);
     background-image: -moz-linear-gradient(top, #0ad100, #134d00);
@@ -327,7 +327,7 @@ html, body {
     width: inherit;
     display: inline-block;
 }
-.accept:hover {
+.accept:hover, .confirm:hover {
     background: #134d00;
     background-image: -webkit-linear-gradient(top, #134d00, #0ad100);
     background-image: -moz-linear-gradient(top, #134d00, #0ad100);
