@@ -95,10 +95,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'>
 			</div>
 			<div id="menu">
-                <div class="button" data-step="6" data-intro="Take our survey so we can improve" data-position='bottom'><a href="https://docs.google.com/a/stevens.edu/forms/d/1AHLz_QJc1Dm7Odzcs0hkRSsuQFCI4VKTJY9PZj9NI-4/viewform">Take Survey</a></div>
+                <div class="button" data-step="7" data-intro="Take our survey so we can improve" data-position='bottom'><a href="https://docs.google.com/a/stevens.edu/forms/d/1AHLz_QJc1Dm7Odzcs0hkRSsuQFCI4VKTJY9PZj9NI-4/viewform">Take Survey</a></div>
                 <a href="https://twitter.com/intent/tweet?button_hashtag=ourClimateApp&text=I%20attempted%20to%20save%20our%20planet%20from%20climate%20change%20using%20the%20" class="twitter-hashtag-button">Tweet #ourClimateApp</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-				<span>Menu</span>
+				<span data-step="6" data-intro="Opening the Menu will allow you to see these tooltips again, as well as restart your progress to start fresh!" data-position='bottom'>Menu</span>
 				<ul>
 					<li class="about">About</li>
                     <li class="help"><a href="javascript:void(0);" onclick="javascript:introJs().start();">Help</a></li>
