@@ -414,9 +414,9 @@ function gameLoop()
 			if(events[i]["gStatus"] != null)
 				continue;
 			
-			var rand = randomNum(0, 100, 0);
+			var rand = randomNum(0, 1000, 0);
 			
-			if(rand < 2)
+			if(rand < 100 && rand >= 98)
 				events[i]["gStatus"] = "fired";
 		}
 		else
