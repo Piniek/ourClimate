@@ -1,0 +1,20 @@
+#svgContainer g {
+	-webkit-transition: all 200ms ease-out;
+	-moz-transition: all 200ms ease-out;
+	-o-transition: all 200ms ease-out;
+	transition: all 200ms ease-out;
+	transition-property: fill, opacity;
+}
+#svgContainer.active g {
+	opacity: 0;
+}
+#svgContainer g.active {
+	opacity: 1;
+}
+#svgContainer g:hover {
+	fill: #0b1a28;
+	cursor: pointer;
+}
+#svgContainer.active g:hover {
+	fill: #000;
+}

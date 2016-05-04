@@ -13,23 +13,6 @@ $(function() {
 		$("#overlay").toggleClass("active");
 	});
 	
-	
-	$("#graph .title").click(function() {
-		openChart($("#popup .graph ul li.active").attr("data-stat"), $("#popup .graph .chartChoice span.active").attr("data-choice"), 1);
-	});
-	
-	$("#popup .graph ul li").click(function() {
-		$("#popup .graph ul li.active").removeClass("active");
-		$(this).addClass("active");
-		openChart($(this).attr("data-stat"), $("#popup .graph .chartChoice span.active").attr("data-choice"), 0);
-	});
-	
-	$("#popup .graph .chartChoice span").click(function() {
-		$("#popup .graph .chartChoice span.active").removeClass("active");
-		$(this).addClass("active");
-		openChart($("#popup .graph ul li.active").attr("data-stat"), $(this).attr("data-choice"), 0);
-	});
-	
 	$("#overlay").click(function() {
 		closePopup();
 	});
@@ -159,37 +142,6 @@ gForests = [0, 0, ''];
 gCO2 = [0, 0, ''];
 gSea = [0, 0, ''];
 gOrigStats = {"temperature": 0, "forests": 0, "co2": 0, "sea": 0};
-
-
-var gHistory, gTempHistory, gForestsHistory, gCO2History, gSeaHistory;
-gHistory = [];
-gStatsHistory = {
-	"temperature":
-	{
-		"rate": [],
-		"vals": [],
-	},
-	"forests":
-	{
-		"rate": [],
-		"vals": [],
-	},
-	"co2":
-	{
-		"rate": [],
-		"vals": [],
-	},
-	"sea":
-	{
-		"rate": [],
-		"vals": [],
-	}
-};
-gTempHistory = {"rate": [], "vals": []};
-gForestsHistory = {"rate": [], "vals": []};
-gCO2History = {"rate": [], "vals": []};
-gSeaHistory = {"rate": [], "vals": []};
-var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function startGame()
 {
@@ -599,18 +551,10 @@ function resize()
 
 var currDate = new Date();
 var gPause = 0;
-var currMonth = "";
 
 function startTime() {
 	if(gPause)
 		return;
-	
-	if(currMonth != monthNames[currDate.getMonth()])
-	{
-		currMonth = monthNames[currDate.getMonth()];
-		
-		updateHistory();
-	}
 	
 	$("#current-date").text(currDate.toDateString().substring(4));
 	
@@ -629,96 +573,6 @@ function startTime() {
 	gSea[0] += (gSea[2] == '-' ? -1 : 1) * gSea[1] / (365);
 	
 	updateStatsDOM();
-}
-
-function updateHistory()
-{
-	var pastLimit = 12; // number of months to show total
-	var shiftFlag = 0;
-	var val, rate;
-	
-	if(gHistory.length >= pastLimit)
-	{
-		gHistory.shift();
-		shiftFlag = 1;
-	}
-	
-	gHistory.push(currMonth);
-	
-	for (var key in gStatsHistory) {
-		if(key == "temperature")
-		{
-			val = gTemperature[0].toFixed(2);
-			rate = gTemperature[1].toFixed(2);
-			rate = gTemperature[2] == '-' ? -1 * rate : rate;
-		}
-		else if(key == "forests")
-		{
-			val = gForests[0].toFixed(0);
-			rate = gForests[1].toFixed(2);
-			rate = gForests[2] == '-' ? -1 * rate : rate;
-		}
-		else if(key == "co2")
-		{
-			val = gCO2[0].toFixed(2);
-			rate = gCO2[1].toFixed(2);
-			rate = gCO2[2] == '-' ? -1 * rate : rate;
-		}
-		else if(key == "sea")
-		{
-			val = gSea[0].toFixed(2);
-			rate = gSea[1].toFixed(2);
-			rate = gSea[2] == '-' ? -1 * rate : rate;
-		}
-		
-		if(shiftFlag)
-		{
-			gStatsHistory[key]["vals"].shift();
-			gStatsHistory[key]["rate"].shift();
-		}
-		
-		gStatsHistory[key]["vals"].push(val);
-		gStatsHistory[key]["rate"].push(rate);
-	}
-}
-
-function openChart(stat, choice, open)
-{
-	var ctx = $("#statsChart");
-	var data = {
-		labels: gHistory,
-		datasets: [
-			{
-				label: "",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "rgba(75,192,192,0.4)",
-				borderColor: "rgba(75,192,192,1)",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(75,192,192,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(75,192,192,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: gStatsHistory[stat][choice],
-			}
-		]
-	};
-	var myLineChart = new Chart(ctx, {
-		type: 'line',
-		data: data,
-		options: {}
-	});
-	
-	if(open)
-		openPopup("Data", "", "graph");
 }
 
 
@@ -745,4 +599,3 @@ function openChart(stat, choice, open)
 *	Game is over when stats are too bad (thresholds needed for this) or when they run out of events
 *		Need to figure out how results should be shown
 *******************/
-

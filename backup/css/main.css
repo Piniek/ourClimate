@@ -75,26 +75,6 @@ html, body {
 	padding: 0;
 }
 
-#popup .graph ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-#popup .graph ul li {
-	display: inline-block;
-	cursor: pointer;
-}
-#popup .graph ul li.active {
-	font-weight: bold;
-}
-
-#popup .graph .chartChoice span {
-	cursor: pointer;
-}
-#popup .graph .chartChoice span.active {
-	font-weight: bold;
-}
-
 /** Top **/
 #top {
 	font-size: 24px;
@@ -243,34 +223,6 @@ html, body {
 	font-size: 18px;
 }
 
-
-#graph {
-	position: absolute;
-	padding-left: 20px;
-	left: 135px;
-	-webkit-transition: all 0.315s ease-out;
-	-moz-transition: all 0.315s ease-out;
-	transition: all 0.315s ease-out;
-}
-#graph.active {
-	z-index: 5;
-    color: black;
-}
-#graph .title {
-	cursor: pointer;
-	margin-left: 18px;
-}
-#graph .title:before {
-	content: "\f201";
-	font-family: 'FontAwesome';
-	position: absolute;
-	top: 5px;
-	left: 6px;
-	-webkit-transition: content 0.3s ease-out;
-	-moz-transition: content 0.3s ease-out;
-	transition: content 0.3s ease-out;
-}
-
 /** Bottom **/
 
 #bottom ul {
@@ -374,7 +326,6 @@ html, body {
     text-decoration: none;
     width: inherit;
     display: inline-block;
-	cursor: pointer;
 }
 .accept:hover, .confirm:hover {
     background: #134d00;
@@ -401,7 +352,6 @@ html, body {
     text-decoration: none;
     width: inherit;
     display: inline-block;
-	cursor: pointer;
 }
 
 .decline:hover {

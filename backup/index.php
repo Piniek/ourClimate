@@ -44,7 +44,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <link href="js/introjs.css" rel="stylesheet">
 		
 		<script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
-		<script src="js/Chart.min.js" type="text/javascript"></script>
 		<script src="js/map.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			var events = <?php echo $questions; ?>;
@@ -80,19 +79,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 					<div class="decline">Decline</div>
 				</div>
 				<div class="confirm">Okay</div>
-				<div class="graph">
-					<ul>
-						<li class="active" data-stat="temperature">Temperature</li>
-						<li data-stat="forests">Forests</li>
-						<li data-stat="co2">CO2 Level</li>
-						<li data-stat="sea">Sea Level</li>
-					</ul>
-					<div class="chartChoice">
-						<span class="active" data-choice="vals">Level</span>
-						<span data-choice="rate">Rate of Change</span>
-					</div>
-					<canvas id="statsChart" width="400" height="400"></canvas>
-				</div>
 			</div>
 		</div>
 		<div id="top">
@@ -105,9 +91,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 						<div>Make a decision, and they'll start showing up here.</div>
 					</li>
 				</ul>
-			</div>
-			<div id="graph">
-				<div class="title">Data</div>
 			</div>
 			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'>
 			</div>
