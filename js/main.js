@@ -13,6 +13,9 @@ $(function() {
 		$("#overlay").toggleClass("active");
 	});
 	
+	$("#menu .about").click(function() {
+		openPopup("About", "This is an HCI project created by four people. One of them misses Five Guys.", "confirm");
+	});
 	
 	$("#graph .title").click(function() {
 		openChart($("#popup .graph ul li.active").attr("data-stat"), $("#popup .graph .chartChoice span.active").attr("data-choice"), 1);
@@ -56,7 +59,8 @@ $(function() {
 	});
 	resize();
 	
-	startTime();
+	$("#current-date").text(currDate.toDateString().substring(4));
+	
 	showIntro();
 	
 	$("#svgContainer").on("click", "g.svg-alert", function() {
@@ -70,7 +74,7 @@ $(function() {
 		else
 			restartGame($(this).attr("class"));
 		
-		closePopup();
+		//closePopup();
 	});
 	
 });
@@ -243,11 +247,10 @@ function startGame()
 
 function restartGame(decision)
 {
+	closePopup();
+	
 	if(decision == "decline")
-	{
-		closePopup();
 		return;
-	}
 	
 	for(var i = 0; i < events.length; i++)
 	{
@@ -267,6 +270,8 @@ function restartGame(decision)
 	});
 	
 	currDate = new Date();
+	
+	gGameOver = 0;
 	
 	startGame();
 }
@@ -352,6 +357,9 @@ function makeDecision(decision, eventID)
 		sea_delta = accepts[j]["sea_delta"];
 		
 		events[i]["gStatus"] = "accepted";
+		
+		if(events[i]["type"] != "passiv")
+			openPopup(events[i]["title"], events[i]["accept_result"], "confirm");
 	}
 	else if(decision == "decline")
 	{
@@ -368,6 +376,9 @@ function makeDecision(decision, eventID)
 		sea_delta = declines[j]["sea_delta"];
 
 		events[i]["gStatus"] = "declined";
+		
+		if(events[i]["type"] != "passiv")
+			openPopup(events[i]["title"], events[i]["decline_result"], "confirm");
 	}
 	
 	// apply delta to rate of change
@@ -375,13 +386,6 @@ function makeDecision(decision, eventID)
 	gForests[1] += forests_delta;
 	gCO2[1] += co2_delta;
 	gSea[1] += sea_delta;
-	
-	console.log("----");
-	console.log("Temperature: "+gTemperature);
-	console.log("Forests: "+gForests);
-	console.log("CO2: "+gCO2);
-	console.log("Sea: "+gSea);
-	console.log("----");
 	
 	// update the signs for each stat
 	gTemperature[2] = gTemperature[1] > 0 ? '+' : gTemperature[1] == 0 ? '' : '-';
@@ -395,13 +399,6 @@ function makeDecision(decision, eventID)
 	
 	gSea[2] = gSea[1] > 0 ? '+' : gSea[1] == 0 ? '' : '-';
 	gSea[1] = Math.abs(gSea[1]);
-	
-	console.log("----");
-	console.log("Temperature: "+gTemperature);
-	console.log("Forests: "+gForests);
-	console.log("CO2: "+gCO2);
-	console.log("Sea: "+gSea);
-	console.log("----");
 	
 	updateStatsDOM();
 	
@@ -418,9 +415,13 @@ function getSeconds(tracker, mills)
 }
 
 var gTimer = 0;
+var gGameOver = 0;
 function gameLoop()
 {
 	if(gPause)
+		return;
+	
+	if(gGameOver)
 		return;
 	
 	gTimer++;
@@ -563,7 +564,22 @@ function fireEvent(eventID)
 
 function createEvents(n)
 {
-	for(var i = 0; i < n; i++)
+	var i;
+	
+	for(i = 0; i < events.length; i++)
+	{
+		if(events[i]["gStatus"] == null && events[i]["type"] != "passiv")
+			break;
+	}
+	
+	if(i == events.length)
+	{
+		openPopup("Congrats!", "You have completed the game! Thank you for playing, and please take our survey if you haven't yet. Thanks!", "confirm");
+		gGameOver = 1;
+		return;
+	}
+	
+	for(i = 0; i < n; i++)
 	{
 		var n = randomNum(0, events.length-1, 0)
 		
@@ -603,6 +619,8 @@ var currMonth = "";
 
 function startTime() {
 	if(gPause)
+		return;
+	if(gGameOver)
 		return;
 	
 	if(currMonth != monthNames[currDate.getMonth()])
@@ -682,6 +700,8 @@ function updateHistory()
 	}
 }
 
+var gLineChart;
+
 function openChart(stat, choice, open)
 {
 	var ctx = $("#statsChart");
@@ -711,7 +731,16 @@ function openChart(stat, choice, open)
 			}
 		]
 	};
-	var myLineChart = new Chart(ctx, {
+	
+	if(gLineChart != null)
+		gLineChart.destroy();
+	
+	// hide legend
+	Chart.defaults.global.legend = false;
+	// just to add padding to top of graph
+	Chart.defaults.global.title["display"] = true;
+	
+	gLineChart = new Chart(ctx, {
 		type: 'line',
 		data: data,
 		options: {}

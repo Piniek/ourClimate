@@ -79,17 +79,26 @@ html, body {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	text-align: center;
 }
 #popup .graph ul li {
 	display: inline-block;
 	cursor: pointer;
+	padding-left: 15px;
+}
+#popup .graph ul li:first-child {
+	padding-left: 0;
 }
 #popup .graph ul li.active {
 	font-weight: bold;
 }
-
+#popup .graph .chartChoice {
+	text-align: center;
+    padding-top: 5px;
+}
 #popup .graph .chartChoice span {
 	cursor: pointer;
+	padding-left: 15px;
 }
 #popup .graph .chartChoice span.active {
 	font-weight: bold;
@@ -133,11 +142,16 @@ html, body {
 	margin: 0;
 }
 #menu.active ul {
-	right: -16px;
+	right: -20px;
     background-color: #0b1a28;
+    top: 38px;
+    padding: 0 3px 0 20px;
 }
 #menu ul li.about {
-
+	cursor: pointer;
+}
+#menu ul li.restart {
+	cursor: pointer;
 }
 #menu ul li:before {
 	font-family: 'FontAwesome';
@@ -157,6 +171,7 @@ html, body {
 }
 #menu ul a{
 	color: white;
+	text-decoration: none;
 }
 
 
