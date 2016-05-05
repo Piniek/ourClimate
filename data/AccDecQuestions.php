@@ -29,10 +29,16 @@
         /** @var character string question location */
         private $location;
         
+        /** @var character string accept result */
+        private $accept_result;
+        
+        /** @var character string decline result */
+        private $decline_result;
+        
         /**
          * Question constructor.
          */
-        public function __construct( $_id, $_title, $_text, $_provided_answer, $_acceptID, $_declineID, $_type, $_threshold, $_location )
+        public function __construct( $_id, $_title, $_text, $_provided_answer, $_acceptID, $_declineID, $_type, $_threshold, $_location, $_accept_result, $_decline_result )
         {
             $this->id         = $_id;
             $this->title      = $_title;
@@ -43,6 +49,8 @@
             $this->type = $_type;
             $this->threshold = $_threshold;
             $this->location = $_location;
+            $this->accept_result = $_accept_result;
+            $this->decline_result = $_decline_result;
         }
         
         /**
@@ -190,6 +198,38 @@
         }
         
         /**
+        * @return string $accept_result
+        */
+        public function getAcceptResult()
+        {
+            return $this->accept_result;   
+        }
+        
+        /**
+        * @param string $accept_result
+        */
+        public function setAcceptResult( $_accept_result )
+        {
+            $this->accept_result = $_accept_result;   
+        }
+        
+        /**
+        * @return string $decline_result
+        */
+        public function getDeclineResult()
+        {
+            return $this->decline_result;   
+        }
+        
+        /**
+        * @param string $decline_result
+        */
+        public function setDeclineResult( $_decline_result )
+        {
+            $this->decline_result = $_decline_result;   
+        }
+        
+        /**
      * Specify data which should be serialized to JSON
      * @link  http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -207,7 +247,9 @@
         'declineID' =>  $this->declineID,
         'type'      =>  $this->type,
         'threshold' =>  $this->threshold,
-        'location'  =>  $this->location
+        'location'  =>  $this->location,
+        'accept_result' =>  $this->accept_result,
+        'decline_result'    =>  $this->decline_result
       ];
 
       return $array;

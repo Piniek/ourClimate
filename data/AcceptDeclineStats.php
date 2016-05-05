@@ -17,20 +17,16 @@
         /** @var varchar sea_delta */
         private $sea_delta;
         
-        /** @var varchar results */
-        private $results;
-        
         /**
          * Question constructor.
          */
-        public function __construct( $_id, $_temp_delta, $_forest_delta, $_co2_delta, $_sea_delta, $_results )
+        public function __construct( $_id, $_temp_delta, $_forest_delta, $_co2_delta, $_sea_delta )
         {
             $this->id         = $_id;
             $this->temp_delta   = $_temp_delta;
             $this->forest_delta = $_forest_delta;
             $this->co2_delta    = $_co2_delta;
             $this->sea_delta    = $_sea_delta;
-            $this->results     = $_results;
         }
         
         /**
@@ -112,22 +108,6 @@
         {
             $this->sea_delta = $_sea_delta;
         }
-
-        /**
-        * @return varchar
-        */
-        public function getResults()
-        {
-            return $this->results;
-        }
-        
-        /**
-        * @param varchar $_results
-        */
-        public function setResults( $_results )
-        {
-            $this->results = $_results;
-        }
         
         
         /**
@@ -144,8 +124,7 @@
                 'temp_delta'    => $this->temp_delta,
                 'forest_delta'  => $this->forest_delta,
                 'co2_delta'     => $this->co2_delta,
-                'sea_delta'     =>  $this->sea_delta,
-                'results'       =>  $this->results
+                'sea_delta'     =>  $this->sea_delta
             ];
             return $array;
         }

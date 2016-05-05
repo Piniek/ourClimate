@@ -29,13 +29,15 @@
             $type = null;
             $threshold = null;
             $location = null;
+            $accept_result = null;
+            $decline_result = null;
             
             $this->getAllAccDecQuestions->execute();
-            $this->getAllAccDecQuestions->bind_result( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location );
+            $this->getAllAccDecQuestions->bind_result( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location, $accept_result, $decline_result );
             
             while ( $this->getAllAccDecQuestions->fetch() )
             {
-                $newQuestion = new AccDecQuestion( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location );
+                $newQuestion = new AccDecQuestion( $id, $title, $text, $provided_answer, $acceptID, $declineID, $type, $threshold, $location, $accept_result, $decline_result );
                 
                 array_push( $ret, $newQuestion->jsonSerialize() );
             }
@@ -52,14 +54,13 @@
             $forest_delta = null;
             $co2_delta = null;
             $sea_delta = null;
-            $results = null;
             
             $this->getAllAcceptStats->execute();
-            $this->getAllAcceptStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
+            $this->getAllAcceptStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta);
             
             while ( $this->getAllAcceptStats->fetch() )
             {
-                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
+                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta);
                 array_push( $ret, $newStat->jsonSerialize() );
             }
             
@@ -75,14 +76,13 @@
             $forest_delta = null;
             $co2_delta = null;
             $sea_delta = null;
-            $results = null;
             
             $this->getAllDeclineStats->execute();
-            $this->getAllDeclineStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
+            $this->getAllDeclineStats->bind_result( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta);
             
             while ( $this->getAllDeclineStats->fetch() )
             {
-                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta, $results );
+                $newStat = new AcceptDeclineStats( $id, $temp_delta, $forest_delta, $co2_delta, $sea_delta);
                 array_push( $ret, $newStat->jsonSerialize() );
             }
             
