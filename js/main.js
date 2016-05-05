@@ -14,7 +14,7 @@ $(function() {
 	});
 	
 	$("#menu .about").click(function() {
-		openPopup("About", "This is an HCI project created by four people. One of them misses Five Guys.", "confirm");
+		openPopup("About", "This is an HCI project created by four people. One of them misses Five Guys & In-N-Out.", "confirm");
 	});
 	
 	$("#graph .title").click(function() {
