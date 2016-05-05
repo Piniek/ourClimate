@@ -107,7 +107,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 				</ul>
 			</div>
 			<div id="graph">
-				<div class="title">Data</div>
+				<div class="title" data-step="5" data-intro="These will show you graphs that represent the changing stats over time. Keep an eye out on how your decisions are affecting these!" data-position='bottom'>Data</div>
 			</div>
 			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'>
 			</div>
@@ -123,16 +123,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 				</ul>
 			</div>
 		</div>
-		<div id="svgContainer" data-step="3" data-intro="This is the globe! Alerts will pop up on the map. Make sure you complete these to save the planet.">
-		</div>
-		
-		<!--<button id="bounce">Bounce Random Alert</button>
-		<button id="rand">Generate Alert</button>
-		<label>Add Alert <input type="checkbox" id="add-alert" /></label>-->
-		
-		<div id="bottom">
+        <div id="bottom">
 			<ul>
-				<li class="temp" data-step="4" data-intro="These represent the current status of the world's climate. These stats will change as you make your decisions" data-position='top'>
+				<li class="temp" data-step="4" data-intro="These represent the current status of the world's climate. These stats will change as you make your decisions" data-position='bottom'>
 					<div class="graphic"><img src='./img/temperature/3.png' /></div>
 					<div class="change">+3.9</div>
 					<div class="info">
@@ -166,6 +159,13 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 				</li>
 			</ul>
 		</div>
+		<div id="svgContainer" data-step="3" data-intro="This is the globe! Red pin alerts will pop up on the map. Make sure you complete these by clicking on them. Help save the planet!">
+		</div>
+		
+		<!--<button id="bounce">Bounce Random Alert</button>
+		<button id="rand">Generate Alert</button>
+		<label>Add Alert <input type="checkbox" id="add-alert" /></label>-->
+		
         <script type="text/javascript" src="js/intro.js"></script>
 	</body>
 </html>
