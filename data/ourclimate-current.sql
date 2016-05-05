@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2016 at 02:58 AM
+-- Generation Time: May 05, 2016 at 04:55 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -66,12 +66,12 @@ INSERT INTO `accdec_questions` (`id`, `title`, `text`, `provided_answer`, `accep
 (12, 'Expand and Modernize the Electric Grid\r\n', 'This will allow for more use of solar and wind energy, decreasing use of fossil fuels. However, this is a huge undertaking financially, and finding the right people for the job will take time. \r\n', NULL, 3, 1, 'accdec', NULL, 'america', '', ''),
 (13, 'The Kyoto Protocol', 'A worldwide effort to reduce CO2 emissions, signed by many different countries. \r\n', NULL, 4, 1, 'accdec', NULL, 'japan', '', ''),
 (14, 'Subsidize purchases of electric cars ', 'Electric cars, when powered by nuclear energy, have much less emission rates than traditional cars. Subsidizing the use would encourage more adopters. These subsidies may upset other car manufacturers.', NULL, 3, 1, 'accdec', NULL, NULL, '', ''),
-(15, 'Massive Flooding', 'The sea has gotten to a point where massive flooding can be seen, and people have begun moving inland. ', NULL, 1, 1, 'passiv', '{"sea", "40", "+"}', NULL, '', ''),
+(15, 'Massive Flooding', 'The sea has gotten to a point where massive flooding can be seen, and people have begun moving inland. ', NULL, 1, 1, 'passiv', '{"sea", "110", "+"}', NULL, '', ''),
 (16, 'Technology Breakthrough', 'Thanks to research subsidies, there has been a techonological breakthrough that significantly decreases CO2 emissions.', NULL, 1, 1, 'passiv', NULL, NULL, '', ''),
-(17, 'Widespread Droughts', 'Droughts are becoming a huge problem throughout the world due to the rising temperature.', NULL, 1, 1, 'passiv', '{"temperature", "32", "+"}', NULL, '', ''),
-(18, 'Nuisance Flooding', 'With the sea level at its current state, nuisance flooding will be a common occurrence. Flooding now occurs frequently only when confronted with high tide conditions.', NULL, 1, 1, 'passiv', '{"sea", "32", "+"}', NULL, '', ''),
-(19, 'Air Pollution', 'The rising temperatures have caused significant air pollution by increasing the ground level ozone. People could begin feeling the effects of this.', NULL, 1, 1, 'passiv', '{"temperature", "36", "+"}', NULL, '', ''),
-(20, 'Acidic Oceans', 'Due to the high rate of carbon emissions the oceans are absorbing it, becoming progressively more acidic. This can seriously endanger underwater life. \r\n', NULL, 1, 1, 'passiv', '{"co2", "5000", "+")', NULL, '', ''),
+(17, 'Widespread Droughts', 'Droughts are becoming a huge problem throughout the world due to the rising temperature.', NULL, 1, 1, 'passiv', '{"temperature", "60", "+"}', NULL, '', ''),
+(18, 'Nuisance Flooding', 'With the sea level at its current state, nuisance flooding will be a common occurrence. Flooding now occurs frequently only when confronted with high tide conditions.', NULL, 1, 1, 'passiv', '{"sea", "90", "+"}', NULL, '', ''),
+(19, 'Air Pollution', 'The rising temperatures have caused significant air pollution by increasing the ground level ozone. People could begin feeling the effects of this.', NULL, 1, 1, 'passiv', '{"temperature", "65", "+"}', NULL, '', ''),
+(20, 'Acidic Oceans', 'Due to the high rate of carbon emissions the oceans are absorbing it, becoming progressively more acidic. This can seriously endanger underwater life. \r\n', NULL, 1, 1, 'passiv', '{"co2", "500", "+")', NULL, '', ''),
 (21, 'Ozone Irreparable\r\n', 'Due to the extreme high rates of CO2 in the air, the ozone is now damaged to a irreparable state. Over time it could have repaired itself, but now it will never be back to how it was pre-industry.', NULL, 1, 1, 'passiv', '{"co2", "1500", "+")', NULL, '', '');
 
 -- --------------------------------------------------------
