@@ -69,6 +69,17 @@ html, body {
 #popup .desc {
 	margin: 0 0 8px 0;
 }
+#popup .desc .graphic {
+	height: 185px;
+    width: 250px;
+    overflow: hidden;
+    padding: 10px;
+    float: right;
+    text-align: center;
+}
+#popup .desc .graphic img {
+	max-width: 250px;
+}
 #popup ul.options {
 	list-style: none;
 	margin: 0;
@@ -114,8 +125,8 @@ html, body {
 }
 #current-date {
 	position:absolute;
-	left: 50%;
-	transform: translate(-50%, 0);
+	left: 46%;
+	/*transform: translate(-50%, 0);*/
 }
 
 #menu {
@@ -135,17 +146,18 @@ html, body {
 }
 #menu ul {
 	position: absolute;
-	right: -120px;
+	right: -125px;
+    top: 38px;
 	-webkit-transition: all 0.3s ease-out;
 	transition: all 0.3s ease-out;
 	list-style: none;
 	margin: 0;
+    padding: 0 3px 0 20px;
+	z-index: 999;
 }
 #menu.active ul {
 	right: -20px;
     background-color: #0b1a28;
-    top: 38px;
-    padding: 0 3px 0 20px;
 }
 #menu ul li.about {
 	cursor: pointer;
