@@ -32,15 +32,15 @@ DROP TABLE IF EXISTS `accdec_questions`;
 CREATE TABLE IF NOT EXISTS `accdec_questions` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
-  `text` varchar(220) NOT NULL,
+  `text` TEXT NOT NULL,
   `provided_answer` tinyint(1) DEFAULT NULL,
   `acceptID` int(11) NOT NULL,
   `declineID` int(11) NOT NULL,
   `type` char(6) NOT NULL,
   `threshold` varchar(50) DEFAULT NULL,
   `location` varchar(20) DEFAULT NULL,
-  `accept_result` varchar(255) NOT NULL,
-  `decline_result` varchar(255) NOT NULL
+  `accept_result` TEXT NOT NULL,
+  `decline_result` TEXT NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
