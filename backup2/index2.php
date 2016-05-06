@@ -34,8 +34,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 </script><script>utmx('url','A/B');</script>
 <!-- End of Google Analytics Content Experiment code -->
 
-		<title>ourClimate</title>
-
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
 		
@@ -46,9 +44,8 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <link href="js/introjs.css" rel="stylesheet">
 		
 		<script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
-		<script src="js/Chart.min.js" type="text/javascript"></script>
 		<script src="js/map.js" type="text/javascript"></script>
-		<script type="text/javascript">
+        <script type="text/javascript">
 			var events = <?php echo $questions; ?>;
 			var accepts = <?php echo $accept_stats; ?>;
 			var declines = <?php echo $decline_stats; ?>;
@@ -73,25 +70,15 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 			<div class="desc">Descriptions and stuff will go here</div>
 			<div class="opts">
 				<ul class="options">
+					<li><label><input type="radio" name="sample" /> Option 1</label></li>
+					<li><label><input type="radio" name="sample" /> Option 2</label></li>
+					<li><label><input type="radio" name="sample" /> Option 3</label></li>
 				</ul>
 				<div class="accdec">
 					<div class="accept">Accept</div>
 					<div class="decline">Decline</div>
 				</div>
 				<div class="confirm">Okay</div>
-				<div class="graph">
-					<ul>
-						<li class="active" data-stat="temperature">Temperature</li>
-						<li data-stat="forests">Forests</li>
-						<li data-stat="co2">CO2 Level</li>
-						<li data-stat="sea">Sea Level</li>
-					</ul>
-					<div class="chartChoice">
-						<span class="active" data-choice="vals">Level</span>
-						<span data-choice="rate">Rate of Change</span>
-					</div>
-					<canvas id="statsChart" width="400" height="400"></canvas>
-				</div>
 			</div>
 		</div>
 		<div id="top">
@@ -105,13 +92,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 					</li>
 				</ul>
 			</div>
-			<div id="graph">
-				<div class="title" data-step="5" data-intro="These will show you graphs that represent the changing stats over time. Keep an eye out on how your decisions are affecting these!" data-position='bottom'>Data</div>
-			</div>
 			<div id="current-date" data-step="2" data-intro="This is the current time in the simulation. Keep an eye on it!" data-position='right'>
 			</div>
 			<div id="menu">
-                <div class="button" data-step="7" data-intro="Take our survey so we can improve" data-position='bottom'><a href="https://docs.google.com/forms/d/1rBkxxyUthfZUyli4oRWXlhhYKDlncm6WQ449awaQcSs/viewform" target="_blank">Take Survey</a></div>
+                <div class="button" data-step="7" data-intro="Take our survey so we can improve" data-position='bottom'><a href="https://docs.google.com/a/stevens.edu/forms/d/1yi0kh6-hTs81wsAMi-LlGmCGZZSR6WwDPbjfJAGgYQg/viewform">Take Survey</a></div>
                 <a href="https://twitter.com/intent/tweet?button_hashtag=ourClimateApp&text=I%20attempted%20to%20save%20our%20planet%20from%20climate%20change%20using%20the%20" class="twitter-hashtag-button">Tweet #ourClimateApp</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 				<span data-step="6" data-intro="Opening the Menu will allow you to see these tooltips again, as well as restart your progress to start fresh!" data-position='bottom'>Menu</span>
@@ -122,43 +106,43 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 				</ul>
 			</div>
 		</div>
-		<div id="svgContainer" data-step="3" data-intro="This is the globe! Red pin alerts will pop up on the map. Make sure you complete these by clicking on them. Help save the planet!">
-		</div>
         <div id="bottom">
 			<ul>
 				<li class="temp" data-step="4" data-intro="These represent the current status of the world's climate. These stats will change as you make your decisions" data-position='bottom'>
-					<div class="graphic"><img src='./img/temperature/3.png' alt="Thermostat" /></div>
-					<div class="change">+0</div>
+					<div class="graphic"><img src='./img/temperature/3.png' /></div>
+					<div class="change">+3.9</div>
 					<div class="info">
 						<h4>Global Temperature</h4>
-						<span>Amount</span>
+						<span>14 F since 1980</span>
 					</div>
 				</li>
 				<li class="forest">
-					<div class="graphic"><img src='./img/forests/3.png' alt="Trees" /></div>
-					<div class="change">+0</div>
+					<div class="graphic"><img src='./img/forests/3.png' /></div>
+					<div class="change">+3.9</div>
 					<div class="info">
 						<h4>Forests</h4>
-						<span>Amount</span>
+						<span>14 F since 1980</span>
 					</div>
 				</li>
 				<li class="co2">
-					<div class="graphic"><img src='./img/co2/3.png' alt="Power plant producing Carbon Dioxide" /></div>
-					<div class="change">+0</div>
+					<div class="graphic"><img src='./img/co2/3.png' /></div>
+					<div class="change">+3.9</div>
 					<div class="info">
 						<h4>Carbon Dioxide Level</h4>
-						<span>Amount</span>
+						<span>14 F since 1980</span>
 					</div>
 				</li>
 				<li class="sea">
-					<div class="graphic"><img src='./img/sea/5.png' alt="Drawing of the arctic with sea animals, and icebergs" /></div>
-					<div class="change">+0</div>
+					<div class="graphic"><img src='./img/sea/5.png' /></div>
+					<div class="change">+3.9</div>
 					<div class="info">
 						<h4>Sea Level</h4>
-						<span>Amounts</span>
+						<span>14 F since 1980</span>
 					</div>
 				</li>
 			</ul>
+		</div>
+		<div id="svgContainer" data-step="3" data-intro="This is the globe! Alerts will pop up on the map. Make sure you complete these to save the planet.">
 		</div>
 		
 		<!--<button id="bounce">Bounce Random Alert</button>
@@ -168,8 +152,3 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <script type="text/javascript" src="js/intro.js"></script>
 	</body>
 </html>
-
-
-
-
-

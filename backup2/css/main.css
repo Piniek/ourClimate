@@ -1,0 +1,442 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Tahoma, Geneva, sans-serif;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    background-color: #b0d5e8;
+	overflow: hidden;
+}
+*, *:before, *:after {
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 3;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+#overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+#popup {
+	width: 500px;
+	background: #fff;
+	padding: 10px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	visibility: hidden;
+	z-index: 5;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+#popup.active {
+	opacity: 1;
+	visibility: visible;
+}
+#popup .close {
+	position: absolute;
+	top: 0;
+	right: 4px;
+	cursor: pointer;
+}
+#popup .close:before {
+	font-family: 'FontAwesome';
+	content: "\f00d";
+}
+#popup h3 {
+	text-align: center;
+	margin: 0 0 8px 0;
+}
+#popup .desc {
+	margin: 0 0 8px 0;
+}
+#popup .desc .graphic {
+	height: 185px;
+    width: 250px;
+    overflow: hidden;
+    padding: 10px;
+    float: right;
+    text-align: center;
+}
+#popup .desc .graphic img {
+	max-width: 250px;
+}
+#popup ul.options {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#popup .graph ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+#popup .graph ul li {
+	display: inline-block;
+	cursor: pointer;
+	padding-left: 15px;
+}
+#popup .graph ul li:first-child {
+	padding-left: 0;
+}
+#popup .graph ul li.active {
+	font-weight: bold;
+}
+#popup .graph .chartChoice {
+	text-align: center;
+    padding-top: 5px;
+}
+#popup .graph .chartChoice span {
+	cursor: pointer;
+	padding-left: 15px;
+}
+#popup .graph .chartChoice span.active {
+	font-weight: bold;
+}
+
+/** Top **/
+#top {
+	font-size: 24px;
+    padding-top: 5px;
+    padding-bottom: 40px;
+    background-color: #0b1a28;
+    color: white;
+}
+#current-date {
+	position:absolute;
+	left: 46%;
+	/*transform: translate(-50%, 0);*/
+}
+
+#menu {
+	position: absolute;
+	right: 20px;
+}
+#menu span {
+	cursor: pointer;
+}
+#menu span:before {
+	content: "\f0c9";
+	font-family: 'FontAwesome';
+	margin-right: 5px;
+}
+#menu.active span:before {
+	content: "\f00d";
+}
+#menu ul {
+	position: absolute;
+	right: -125px;
+    top: 38px;
+	-webkit-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	list-style: none;
+	margin: 0;
+    padding: 0 3px 0 20px;
+	z-index: 999;
+}
+#menu.active ul {
+	right: -20px;
+    background-color: #0b1a28;
+}
+#menu ul li.about {
+	cursor: pointer;
+}
+#menu ul li.restart {
+	cursor: pointer;
+}
+#menu ul li:before {
+	font-family: 'FontAwesome';
+	position: relative;
+	right: 5px;
+	top: -3px;
+	font-size: 20px;
+}
+#menu ul li.about:before {
+	content: "\f05a";
+}
+#menu ul li.help:before {
+	content: "\f059";
+}
+#menu ul li.restart:before {
+	content: "\f01e";
+}
+#menu ul a{
+	color: white;
+	text-decoration: none;
+}
+
+
+#history {
+	position: absolute;
+	padding-left: 20px;
+	-webkit-transition: all 0.315s ease-out;
+	-moz-transition: all 0.315s ease-out;
+	transition: all 0.315s ease-out;
+}
+#history.active {
+	z-index: 5;
+    color: black;
+}
+#history .title {
+	cursor: pointer;
+	margin-left: 18px;
+}
+#history .title:before {
+	content: "\f1ea";
+	font-family: 'FontAwesome';
+	position: absolute;
+	top: 5px;
+	left: 6px;
+	-webkit-transition: content 0.3s ease-out;
+	-moz-transition: content 0.3s ease-out;
+	transition: content 0.3s ease-out;
+}
+#history.active .title:before {
+	content: "\f00d";
+	left: 14px;
+}
+#history .filler {
+	background: #fff;
+	height: 35px;
+	width: 400px;
+	position: absolute;
+	top: 0;
+	left: -410px;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	z-index: -1;
+}
+#history.active .filler {
+	left: -16px;
+}
+#history ul {
+	position: absolute;
+	top: 30px;
+	left: -410px;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	list-style: none;
+	margin: 0;
+	width: 400px;
+	max-height: 500px;
+	overflow-y: scroll;
+	padding-top: 8px;
+	background: #fff;
+}
+#history.active ul {
+	left: -16px;
+}
+#history ul li h4 {
+	font-size: 18px;
+	margin: 2px 0;
+}
+#history ul li h4:before {
+	margin-right: 4px;
+	font-family: 'FontAwesome';
+}
+#history ul li.accepted h4:before {
+	content: "\f058";
+	color: green;
+}
+#history ul li.declined h4:before {
+	content: "\f057";
+	color: red;
+}
+#history ul li div {
+	margin-bottom: 12px;
+	font-size: 18px;
+}
+
+
+#graph {
+	position: absolute;
+	padding-left: 20px;
+	left: 135px;
+	-webkit-transition: all 0.315s ease-out;
+	-moz-transition: all 0.315s ease-out;
+	transition: all 0.315s ease-out;
+}
+#graph.active {
+	z-index: 5;
+    color: black;
+}
+#graph .title {
+	cursor: pointer;
+	margin-left: 18px;
+}
+#graph .title:before {
+	content: "\f201";
+	font-family: 'FontAwesome';
+	position: absolute;
+	top: 5px;
+	left: 6px;
+	-webkit-transition: content 0.3s ease-out;
+	-moz-transition: content 0.3s ease-out;
+	transition: content 0.3s ease-out;
+}
+
+/** Bottom **/
+
+#bottom ul {
+	list-style: none;
+    /*display: inline-block;*/
+	position: relative;
+	padding: 0 0 0 5%;
+}
+#bottom ul li {
+	float: left;
+	padding: 0 0 10px; /* 0 60px 50px; */
+	width: 20%;
+	margin-left: 60px;
+}
+#bottom ul li div {
+	display: inline-block;
+	position: relative;
+}
+#bottom ul li div.info {
+	text-align: center;
+	margin-left: 10px;
+}
+#bottom ul li div.change:before {
+	font-family: 'FontAwesome';
+	content: '-';
+	position: absolute;
+	top: -50px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 50px;
+}
+#bottom ul li.temp div.change.up:before,
+#bottom ul li.co2 div.change.up:before,
+#bottom ul li.sea div.change.up:before,
+#bottom ul li.forest div.change.down:before {
+	color: red;
+}
+#bottom ul li.temp div.change.down:before,
+#bottom ul li.co2 div.change.down:before,
+#bottom ul li.sea div.change.down:before,
+#bottom ul li.forest div.change.up:before {
+	color: green;
+}
+#bottom ul li div.change.up:before {
+	content: '\f176';
+}
+#bottom ul li div.change.down:before {
+	content: '\f175';
+}
+#bottom ul li div.graphic img {
+	width: 60px;
+    position: absolute;
+    top: -60px;
+    left: -60px;
+}
+
+/**Buttons**/
+.button {
+    float: left;
+    padding-right: 5px;
+}
+.button a{
+  background: #960000;
+  background-image: -webkit-linear-gradient(top, #960000, #d40000);
+  background-image: -moz-linear-gradient(top, #960000, #d40000);
+  background-image: -ms-linear-gradient(top, #960000, #d40000);
+  background-image: -o-linear-gradient(top, #960000, #d40000);
+  background-image: linear-gradient(to bottom, #960000, #d40000);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 11px;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.button:hover a{
+  background: #d40000;
+  background-image: -webkit-linear-gradient(top, #d40000, #960000);
+  background-image: -moz-linear-gradient(top, #d40000, #960000);
+  background-image: -ms-linear-gradient(top, #d40000, #960000);
+  background-image: -o-linear-gradient(top, #d40000, #960000);
+  background-image: linear-gradient(to bottom, #d40000, #960000);
+  text-decoration: none;
+}
+
+.accept, .confirm {
+    background: #0ad100;
+    background-image: -webkit-linear-gradient(top, #0ad100, #134d00);
+    background-image: -moz-linear-gradient(top, #0ad100, #134d00);
+    background-image: -ms-linear-gradient(top, #0ad100, #134d00);
+    background-image: -o-linear-gradient(top, #0ad100, #134d00);
+    background-image: linear-gradient(to bottom, #0ad100, #134d00);
+    -webkit-border-radius: 30;
+    -moz-border-radius: 30;
+    border-radius: 30px;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    width: inherit;
+    display: inline-block;
+	cursor: pointer;
+}
+.accept:hover, .confirm:hover {
+    background: #134d00;
+    background-image: -webkit-linear-gradient(top, #134d00, #0ad100);
+    background-image: -moz-linear-gradient(top, #134d00, #0ad100);
+    background-image: -ms-linear-gradient(top, #134d00, #0ad100);
+    background-image: -o-linear-gradient(top, #134d00, #0ad100);
+    background-image: linear-gradient(to bottom, #134d00, #0ad100);
+    text-decoration: none;   
+}
+.decline {
+    background: #ff0000;
+    background-image: -webkit-linear-gradient(top, #ff0000, #990000);
+    background-image: -moz-linear-gradient(top, #ff0000, #990000);
+    background-image: -ms-linear-gradient(top, #ff0000, #990000);
+    background-image: -o-linear-gradient(top, #ff0000, #990000);
+    background-image: linear-gradient(to bottom, #ff0000, #990000);
+    -webkit-border-radius: 30;
+    -moz-border-radius: 30;
+    border-radius: 30px;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    width: inherit;
+    display: inline-block;
+	cursor: pointer;
+}
+
+.decline:hover {
+    background: #990000;
+    background-image: -webkit-linear-gradient(top, #990000, #ff0000);
+    background-image: -moz-linear-gradient(top, #990000, #ff0000);
+    background-image: -ms-linear-gradient(top, #990000, #ff0000);
+    background-image: -o-linear-gradient(top, #990000, #ff0000);
+    background-image: linear-gradient(to bottom, #990000, #ff0000);
+    text-decoration: none; 
+}
