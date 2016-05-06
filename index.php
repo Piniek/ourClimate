@@ -123,6 +123,8 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 				</ul>
 			</div>
 		</div>
+		<div id="svgContainer" data-step="3" data-intro="This is the globe! Red pin alerts will pop up on the map. Make sure you complete these by clicking on them. Help save the planet!">
+		</div>
         <div id="bottom">
 			<ul>
 				<li class="temp" data-step="4" data-intro="These represent the current status of the world's climate. These stats will change as you make your decisions" data-position='bottom'>
@@ -158,8 +160,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 					</div>
 				</li>
 			</ul>
-		</div>
-		<div id="svgContainer" data-step="3" data-intro="This is the globe! Red pin alerts will pop up on the map. Make sure you complete these by clicking on them. Help save the planet!">
 		</div>
 		
 		<!--<button id="bounce">Bounce Random Alert</button>
