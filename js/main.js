@@ -7,7 +7,12 @@ $(function() {
 	
 	$("#history .title").click(function() {
 		if(!$("#history").hasClass("active"))
+		{
+			gPause = 1;
 			$("#history ul").scrollTop(0);
+		}
+		else
+			gPause = 0;
 		
 		$("#history").toggleClass("active");
 		$("#overlay").toggleClass("active");
@@ -306,7 +311,7 @@ function openPopup(title, text, opts)
 	gPause = 1;
 	
 	$("#popup h3").text(title);
-	$("#popup .desc").text(text);
+	$("#popup .desc").html(text);
 	
 	$("#popup .opts > *").hide();
 	
@@ -328,7 +333,10 @@ function openEvent(eventID)
 	if(i == events.length)
 		return;
 	
-	openPopup(events[i]["title"], events[i]["text"], events[i]["type"]);
+	var text = "<div class='graphic'><img src='./img/events/"+events[i]["id"]+".png' alt='"+events[i]["title"]+"' /></div>";
+	text += events[i]["text"];
+	
+	openPopup(events[i]["title"], text, events[i]["type"]);
 }
 
 function makeDecision(decision, eventID)
@@ -555,8 +563,11 @@ function fireEvent(eventID)
 		return;
 	}
 	
+	var text = "<div class='graphic'><img src='./img/events/"+events[i]["id"]+".png' alt='"+events[i]["title"]+"' /></div>";
+	text += events[i]["text"];
+	
 	// show event
-	openPopup(events[eventID]["title"], events[eventID]["text"], "confirm");
+	openPopup(events[eventID]["title"], text, "confirm");
 	
 	// update stats + add event to history
 	makeDecision("accept", events[eventID]["id"]);
